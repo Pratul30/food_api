@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/animation/ScaleRoute.dart';
 import 'package:flutter_app/pages/FoodOrderPage.dart';
 import 'package:flutter_app/widgets/FoodDetailsSlider.dart';
@@ -25,7 +26,6 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          brightness: Brightness.light,
           actions: <Widget>[
             IconButton(
                 icon: Icon(
@@ -35,7 +35,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                 onPressed: () {
                   Navigator.push(context, ScaleRoute(page: FoodOrderPage()));
                 })
-          ],
+          ], systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
         body: Container(
           padding: EdgeInsets.only(
