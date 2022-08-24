@@ -5,7 +5,7 @@ This is because there is no app right now which shows and books delicious authen
 
 Features of our app :-
 
-1. Show and book authentic, local best seller food to tourists, so that they can have a grater sense of indulging atmosphere in the foreign land.
+1. Show and book authentic, local best seller food to tourists, so that they can have a greater sense of indulging atmosphere in the foreign land.
 
 2. Seamless cross border and wallet payments, so that tourists don't have to worry about local payments.
 
