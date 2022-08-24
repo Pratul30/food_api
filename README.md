@@ -1,7 +1,7 @@
 This is an app which provides food delivery services to people including tourists.
 
 Why we included tourists ?
-This is because there is no app right now which recommends and books delicious authentic food  for tourists worldwide with tourist's local currency only.
+This is because there is no app right now which shows and books delicious authentic food  for tourists worldwide with tourist's own local currency only.
 
 Features of our app :-
 
