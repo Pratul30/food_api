@@ -1,33 +1,14 @@
-# Flutter Food Delivery Application Design
+This is an app which provides food delivery services to people including tourists.
 
-## This application is not completed yet. Currently, I am working on it. 
-A small attempt to make an Food delivery app user interface in Flutter for Android and iOS.
-## Food Ordering & Delivery App UI in Flutter
-<img src="screens/full_ui.png"  />
+Why we included tourists ?
+This is because there is no app right now which recommends and books delicious authentic food  for tourists worldwide.
 
-## ScreenShots
-### Home Page
-<img src="screens/home_screen.jpg" height="500em" />
+Features of our app :-
 
-### Food Details Screen & Add To Cart Screen
-<img src="screens/detail_screen.jpg" height="500em" /> &nbsp;&nbsp;&nbsp;&nbsp; <img src="screens/add_to_cart_screen.jpg" height="500em" />
+1. Recommends authentic, local best seller food to tourists, so that they can have a grater sense of indulging atmosphere.
 
-### Login & Registration Screen
-<img src="screens/login_screen.jpg" height="500em" />&nbsp;&nbsp;&nbsp;&nbsp; <img src="screens/signin_scren.jpg" height="500em" />
+2. Seamless cross border and wallet payments, so that tourists don't have to worry about local payments.
 
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-
-[online documentation](https://flutter.dev/docs), which offers tutorials,
+Through our app, tourists can have a greater sense of belonging of food and culture of different currencies, without worrying about having local currency in their hand.
 
 
