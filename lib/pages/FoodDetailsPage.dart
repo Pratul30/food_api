@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/animation/ScaleRoute.dart';
 import 'package:flutter_app/pages/FoodOrderPage.dart';
-import 'package:flutter_app/widgets/FoodDetailsSlider.dart';
 
 class FoodDetailsPage extends StatefulWidget {
   @override
@@ -35,7 +34,8 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                 onPressed: () {
                   Navigator.push(context, ScaleRoute(page: FoodOrderPage()));
                 })
-          ], systemOverlayStyle: SystemUiOverlayStyle.dark,
+          ],
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
         body: Container(
           padding: EdgeInsets.only(

@@ -70,13 +70,15 @@ class BestFoodTiles extends StatelessWidget {
         children: <Widget>[
           Container(
             padding: EdgeInsets.only(left: 10, right: 5, top: 5, bottom: 5),
-            decoration: BoxDecoration(boxShadow: [
-              /* BoxShadow(
+            decoration: BoxDecoration(
+              boxShadow: [
+                /* BoxShadow(
                 color: Color(0xFFfae3e2),
                 blurRadius: 15.0,
                 offset: Offset(0, 0.75),
               ),*/
-            ]),
+              ],
+            ),
             child: Card(
               semanticContainer: true,
               clipBehavior: Clip.antiAliasWithSaveLayer,
