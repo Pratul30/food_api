@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/animation/ScaleRoute.dart';
-import 'package:flutter_app/pages/FoodOrderPage.dart';
+import 'package:flutter_app/screens/FoodOrderScreen.dart';
 
-class FoodDetailsPage extends StatefulWidget {
+class FoodDetailsScreen extends StatefulWidget {
   @override
-  _FoodDetailsPageState createState() => _FoodDetailsPageState();
+  _FoodDetailsScreenState createState() => _FoodDetailsScreenState();
 }
 
-class _FoodDetailsPageState extends State<FoodDetailsPage> {
+class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -32,7 +32,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                   color: Color(0xFF3a3737),
                 ),
                 onPressed: () {
-                  Navigator.push(context, ScaleRoute(page: FoodOrderPage()));
+                  Navigator.push(context, ScaleRoute(page: FoodOrderScreen()));
                 })
           ],
           systemOverlayStyle: SystemUiOverlayStyle.dark,
@@ -286,7 +286,7 @@ class AddToCartMenu extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(context, ScaleRoute(page: FoodOrderPage()));
+              Navigator.push(context, ScaleRoute(page: FoodOrderScreen()));
             },
             child: Container(
               width: 200.0,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/animation/ScaleRoute.dart';
-import 'package:flutter_app/pages/SignInPage.dart';
+import 'package:flutter_app/screens/SignInScreen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String defaultFontFamily = 'Roboto-Light.ttf';
@@ -214,7 +214,8 @@ class SignUpPage extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, ScaleRoute(page: SignInPage()));
+                        Navigator.push(
+                            context, ScaleRoute(page: SignInScreen()));
                       },
                       child: Container(
                         child: Text(

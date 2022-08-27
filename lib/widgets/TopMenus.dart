@@ -42,7 +42,9 @@ class TopMenuTiles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pushNamed('restaurant_list');
+      },
       child: Column(
         children: <Widget>[
           Container(

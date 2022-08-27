@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/animation/ScaleRoute.dart';
-import 'package:flutter_app/pages/FoodDetailsPage.dart';
+import 'package:flutter_app/screens/FoodDetailsScreen.dart';
 
 class PopularFoodsWidget extends StatefulWidget {
   @override
@@ -50,7 +50,7 @@ class PopularFoodTiles extends StatelessWidget {
         Navigator.push(
           context,
           ScaleRoute(
-            page: FoodDetailsPage(),
+            page: FoodDetailsScreen(),
           ),
         );
       },

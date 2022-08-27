@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/animation/ScaleRoute.dart';
-import 'package:flutter_app/pages/SignInPage.dart';
+import 'package:flutter_app/screens/SignInScreen.dart';
 import 'package:flutter_app/widgets/BestFoodWidget.dart';
 import 'package:flutter_app/widgets/BottomNavBarWidget.dart';
 import 'package:flutter_app/widgets/PopularFoodsWidget.dart';
 import 'package:flutter_app/widgets/SearchWidget.dart';
 import 'package:flutter_app/widgets/TopMenus.dart';
 
-class HomePage extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
               color: Color(0xFF3a3737),
             ),
             onPressed: () {
-              Navigator.push(context, ScaleRoute(page: SignInPage()));
+              Navigator.push(context, ScaleRoute(page: SignInScreen()));
             },
           )
         ],
