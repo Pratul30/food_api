@@ -7,10 +7,10 @@ class FoodDetailsSlider extends StatelessWidget {
   String slideImage3;
 
   FoodDetailsSlider(
-      {Key key,
-      @required this.slideImage1,
-      @required this.slideImage2,
-      @required this.slideImage3})
+      {Key? key,
+      required this.slideImage1,
+      required this.slideImage2,
+      required this.slideImage3})
       : super(key: key);
 
   @override
