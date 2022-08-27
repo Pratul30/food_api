@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class Restaurant {
+  String id;
   String name;
   String affordability;
   String imageUrl;
@@ -9,6 +10,7 @@ class Restaurant {
   int totalReviews;
 
   Restaurant({
+    this.id,
     this.name,
     this.affordability,
     this.imageUrl,

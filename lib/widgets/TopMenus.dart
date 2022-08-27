@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/location.dart';
+import 'package:provider/provider.dart';
 
 class TopMenus extends StatefulWidget {
   @override
@@ -43,7 +45,7 @@ class TopMenuTiles extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed('restaurant_list');
+        Navigator.of(context).pushNamed('Restaurant_list');
       },
       child: Column(
         children: <Widget>[

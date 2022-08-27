@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
+
 import 'package:flutter_app/animation/ScaleRoute.dart';
 import 'package:flutter_app/screens/SignInScreen.dart';
 import 'package:flutter_app/widgets/BestFoodWidget.dart';
@@ -7,12 +10,21 @@ import 'package:flutter_app/widgets/PopularFoodsWidget.dart';
 import 'package:flutter_app/widgets/SearchWidget.dart';
 import 'package:flutter_app/widgets/TopMenus.dart';
 
+import '../providers/location.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<Location>(context, listen: false).getLocation();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

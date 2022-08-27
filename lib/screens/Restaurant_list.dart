@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/RestaurantCard.dart';
+
 class RestaurantListScreen extends StatelessWidget {
   const RestaurantListScreen({Key key}) : super(key: key);
 
@@ -13,10 +15,9 @@ class RestaurantListScreen extends StatelessWidget {
         brightness: Brightness.light,
         backgroundColor: Color.fromRGBO(255, 102, 102, 0.85),
       ),
-      body: Container(
-        child: Center(
-          child: Text('hi'),
-        ),
+      body: ListView.builder(
+        itemBuilder: ((context, index) => RestaurantCard()),
+        itemCount: 3,
       ),
     );
   }
