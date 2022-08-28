@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rapyd_app/app/routes/routes.app.dart';
 import 'package:rapyd_app/app/widgets/bottom.bar.dart';
 
 void main() {
@@ -10,10 +12,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(fontFamily: 'Roboto', hintColor: Color(0xFFd0cece)),
-        home: BottomBar(),
+    return MultiProvider(
+      providers: [ ],
+      child: MaterialApp(
+          debugShowCheckedModeBanner: true,
+          theme: ThemeData(fontFamily: 'Roboto', hintColor: Color(0xFFd0cece)),
+          home: BottomBar(),
+          initialRoute: RoutesApp.homeview,
+          routes: routesMap,
+        ),
     );
   }
 }

@@ -43,11 +43,13 @@ class _HomeViewState extends State<HomeView> {
         ], 
         systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
-
+      
       body: ChangeNotifierProvider<ProductVM>(
         create: (BuildContext context) => productVM,
         child: Consumer<ProductVM>(
             builder: (context, value, _){
+              
+
               if(value.productModel.status == Status.LOADING){
             return Center(
               child: Column(
