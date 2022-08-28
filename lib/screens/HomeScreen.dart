@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_app/widgets/BestFoodWidget.dart';
+import 'package:provider/provider.dart';
+
+import 'package:flutter_app/animation/ScaleRoute.dart';
+import 'package:flutter_app/screens/SignInScreen.dart';
+import 'package:flutter_app/widgets/BottomNavBarWidget.dart';
+import 'package:flutter_app/widgets/PopularFoodsWidget.dart';
+import 'package:flutter_app/widgets/SearchWidget.dart';
+import 'package:flutter_app/widgets/TopMenus.dart';
+
+import '../providers/location.dart';
+
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<Location>(context, listen: false).getLocation();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFFFAFAFA),
+        elevation: 0,
+        title: Text(
+          "What would you like to eat?",
+          style: TextStyle(
+              color: Color(0xFF3a3737),
+              fontSize: 16,
+              fontWeight: FontWeight.w500),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.notifications_none,
+              color: Color(0xFF3a3737),
+            ),
+            onPressed: () {
+              Navigator.push(context, ScaleRoute(page: SignInScreen()));
+            },
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SearchWidget(),
+            TopMenus(),
+            PopularFoodsWidget(),
+            // BestFoodWidget(),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomNavBarWidget(),
+    );
+  }
+}

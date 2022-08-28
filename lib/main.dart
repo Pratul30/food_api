@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:rapyd_app/app/widgets/bottom.bar.dart';
+import 'package:flutter_app/providers/menu.dart';
+import 'package:flutter_app/screens/Restaurant_list.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/restaurant.dart';
+import '../screens/HomeScreen.dart';
+import '../providers/location.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,10 +16,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: ((context) => RestaurantVM()),
+        ),
+        ChangeNotifierProvider(
+          create: ((context) => Location()),
+        ),
+        ChangeNotifierProvider(
+          create: ((context) => MenuVM()),
+        ),
+      ],
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'Roboto', hintColor: Color(0xFFd0cece)),
-        home: BottomBar(),
+        home: HomeScreen(),
+        routes: {
+          'Restaurant_list': (context) => RestaurantListScreen(),
+        },
+      ),
     );
   }
 }

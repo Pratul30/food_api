@@ -1,4 +1,4 @@
-name: rapyd_app
+name: flutter_app
 description: A new Flutter application.
 
 # The following defines the version and build number for your application.
@@ -15,6 +15,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
+  # sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -27,6 +28,7 @@ dependencies:
   font_awesome_flutter: 
   provider: 
   http: 
+  geolocator: ^9.0.1
 
 
 dev_dependencies:
