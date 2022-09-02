@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/Restaurant_list.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/restaurant.dart';
+import 'providers/view models/geoId.dart';
 import '../screens/HomeScreen.dart';
-import '../providers/location.dart';
+
+import './providers/view models/restaurant.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,11 +18,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: ((context) => RestaurantVM()),
+        ChangeNotifierProvider<GeoIdVM>(
+          create: ((context) => GeoIdVM()),
         ),
-        ChangeNotifierProvider(
-          create: ((context) => Location()),
+        ChangeNotifierProxyProvider<GeoIdVM, RestaurantVM>(
+          create: (context) => RestaurantVM(Provider.of<GeoIdVM>(context)),
+          update: (context, value, previous) => RestaurantVM(value),
         ),
       ],
       child: MaterialApp(

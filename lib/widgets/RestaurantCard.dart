@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/location.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/restaurant.dart';
+import '../providers/view models/geoId.dart';
 
 class RestaurantCard extends StatefulWidget {
   const RestaurantCard({Key key}) : super(key: key);

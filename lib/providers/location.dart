@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 
-class Location with ChangeNotifier {
+class Location {
+  //will give the location(latitude and longitude) of the user
+
   Map<String, double> userLocation = {};
 
   Future<void> getLocation() async {
@@ -14,7 +15,6 @@ class Location with ChangeNotifier {
       'latitude': res.latitude,
       'longitude': res.longitude,
     });
-    notifyListeners();
   }
 
   Map<String, double> get location {

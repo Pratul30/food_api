@@ -22,7 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<Location>(context, listen: false).getLocation();
+    var obj = new Location();
+    obj.getLocation();
+    print(obj.location);
   }
 
   @override

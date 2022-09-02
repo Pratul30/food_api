@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/providers/location.dart';
 import 'package:provider/provider.dart';
+
+import '../providers/view models/geoId.dart';
 
 class TopMenus extends StatefulWidget {
   @override
@@ -45,6 +46,7 @@ class TopMenuTiles extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        Provider.of<GeoIdVM>(context, listen: false).getGeoId();
         Navigator.of(context).pushNamed('Restaurant_list');
       },
       child: Column(

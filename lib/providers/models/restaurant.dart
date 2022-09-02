@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-
 class Restaurant {
+  //restaurant model
+
   String id;
   String name;
   String affordability;
@@ -18,12 +18,4 @@ class Restaurant {
     this.rating,
     this.totalReviews,
   });
-}
-
-class RestaurantVM with ChangeNotifier {
-  List<Restaurant> resList = [];
-
-  List<Restaurant> get restaurant {
-    return [...resList];
-  }
 }
