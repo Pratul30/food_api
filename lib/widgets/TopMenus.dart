@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/menu.dart';
 import 'package:provider/provider.dart';
-
-import '../providers/view models/geoId.dart';
 
 class TopMenus extends StatefulWidget {
   @override
@@ -11,43 +10,41 @@ class TopMenus extends StatefulWidget {
 class _TopMenusState extends State<TopMenus> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          TopMenuTiles(name: "Burger", imageUrl: "ic_burger", slug: ""),
-          TopMenuTiles(name: "Sushi", imageUrl: "ic_sushi", slug: ""),
-          TopMenuTiles(name: "Pizza", imageUrl: "ic_pizza", slug: ""),
-          TopMenuTiles(name: "Cake", imageUrl: "ic_cake", slug: ""),
-          TopMenuTiles(name: "Ice Cream", imageUrl: "ic_ice_cream", slug: ""),
-          TopMenuTiles(name: "Soft Drink", imageUrl: "ic_soft_drink", slug: ""),
-          TopMenuTiles(name: "Burger", imageUrl: "ic_burger", slug: ""),
-          TopMenuTiles(name: "Sushi", imageUrl: "ic_sushi", slug: ""),
-        ],
-      ),
+    return Consumer<MenuVM>(
+      builder: (context, value, _) {
+        return Container(
+          height: 100,
+          child: ListView.builder(
+            itemCount: value.menu.length,
+            itemBuilder: (BuildContext context, int index) {
+              return TopMenuTiles(
+                name: value.menu[index].name, 
+                imageUrl: value.menu[index].imageUrl, 
+              );
+            },
+            scrollDirection: Axis.horizontal,
+          ),
+        );
+      }
     );
   }
 }
 
 class TopMenuTiles extends StatelessWidget {
-  String name;
-  String imageUrl;
-  String slug;
+  final String name;
+  final String imageUrl;
 
-  TopMenuTiles(
-      {Key key,
+  TopMenuTiles({
+      Key key,
       @required this.name,
       @required this.imageUrl,
-      @required this.slug})
-      : super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Provider.of<GeoIdVM>(context, listen: false).getGeoId();
-        Navigator.of(context).pushNamed('Restaurant_list');
+        Navigator.of(context).pushNamed('menu_list');
       },
       child: Column(
         children: <Widget>[
@@ -75,7 +72,7 @@ class TopMenuTiles extends StatelessWidget {
                 height: 50,
                 child: Center(
                   child: Image.asset(
-                    'assets/images/topmenu/' + imageUrl + ".png",
+                    imageUrl,
                     width: 24,
                     height: 24,
                   ),

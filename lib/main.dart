@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/menu.dart';
 import 'package:flutter_app/screens/Restaurant_list.dart';
+import 'package:flutter_app/screens/menu_list.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/view models/geoId.dart';
@@ -25,6 +27,9 @@ class MyApp extends StatelessWidget {
           create: (context) => RestaurantVM(Provider.of<GeoIdVM>(context)),
           update: (context, value, previous) => RestaurantVM(value),
         ),
+        ChangeNotifierProvider(
+          create: ((context) => MenuVM()),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -32,6 +37,8 @@ class MyApp extends StatelessWidget {
         home: HomeScreen(),
         routes: {
           'Restaurant_list': (context) => RestaurantListScreen(),
+          'menu_list': (context) => MenuListScreen(),
+
         },
       ),
     );
