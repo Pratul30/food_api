@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/view%20models/geoId.dart';
+import 'package:flutter_app/providers/view%20models/restaurant.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
@@ -22,9 +24,15 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    var obj = new Location();
-    obj.getLocation();
-    print(obj.location);
+    getUserGeoId();
+  }
+
+  void getUserGeoId() async {
+    final geoObj = new GeoIdVM();
+    await geoObj.getGeoId();
+    print(geoObj.getgeoId);
+    final resObj = new RestaurantVM(geoObj);
+    await resObj.loadAllRestaurants();
   }
 
   @override
@@ -58,6 +66,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             SearchWidget(),
             TopMenus(),
+            SizedBox(
+              height: 10,
+            ),
             PopularFoodsWidget(),
             BestFoodWidget(),
           ],

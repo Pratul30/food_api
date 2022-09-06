@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
 class Location {
@@ -8,6 +9,7 @@ class Location {
   Future<void> getLocation() async {
     final permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied) {
+      print('denied');
       return;
     }
     final res = await Geolocator.getCurrentPosition();

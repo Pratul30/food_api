@@ -3,7 +3,7 @@ class Restaurant {
 
   String id;
   String name;
-  String affordability;
+  String info;
   String imageUrl;
   String isOpen;
   double rating;
@@ -12,7 +12,7 @@ class Restaurant {
   Restaurant({
     this.id,
     this.name,
-    this.affordability,
+    this.info,
     this.imageUrl,
     this.isOpen,
     this.rating,

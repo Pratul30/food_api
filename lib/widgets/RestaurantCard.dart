@@ -4,19 +4,11 @@ import 'package:provider/provider.dart';
 
 import '../providers/view models/geoId.dart';
 
-class RestaurantCard extends StatefulWidget {
-  const RestaurantCard({Key key}) : super(key: key);
+class RestaurantCard extends StatelessWidget {
+  RestaurantCard(this.name, this.id);
 
-  @override
-  State<RestaurantCard> createState() => _RestaurantCardState();
-}
-
-class _RestaurantCardState extends State<RestaurantCard> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+  final name;
+  final id;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +21,7 @@ class _RestaurantCardState extends State<RestaurantCard> {
       ),
       width: double.infinity,
       child: Card(
-        child: Text('restaurant image, name, affordability'),
+        child: Text('name: $name , contentId: $id'),
         elevation: 5,
       ),
     );

@@ -14,8 +14,6 @@ class GeoIdVM with ChangeNotifier {
     return geoId;
   }
 
-  int get usergeoId => null;
-
   Future<void> getGeoId() async {
     var locObj = new Location();
     await locObj.getLocation();
@@ -41,7 +39,6 @@ class GeoIdVM with ChangeNotifier {
     });
     final res = json.decode(response.body);
     geoId = int.parse(res['data'][0]['ranking_geo_id']);
-    print(geoId);
     notifyListeners();
   }
 }

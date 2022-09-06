@@ -65,7 +65,9 @@ class BestFoodTiles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pushNamed('Restaurant_list');
+      },
       child: Column(
         children: <Widget>[
           Container(

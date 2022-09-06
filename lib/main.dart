@@ -5,6 +5,7 @@ import 'package:flutter_app/screens/menu_list.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/view models/geoId.dart';
+import 'providers/location.dart';
 import '../screens/HomeScreen.dart';
 
 import './providers/view models/restaurant.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
           create: ((context) => GeoIdVM()),
         ),
         ChangeNotifierProxyProvider<GeoIdVM, RestaurantVM>(
-          create: (context) => RestaurantVM(Provider.of<GeoIdVM>(context)),
+          create: (context) =>
+              RestaurantVM(Provider.of<GeoIdVM>(context, listen: false)),
           update: (context, value, previous) => RestaurantVM(value),
         ),
         ChangeNotifierProvider(
@@ -38,7 +40,6 @@ class MyApp extends StatelessWidget {
         routes: {
           'Restaurant_list': (context) => RestaurantListScreen(),
           'menu_list': (context) => MenuListScreen(),
-
         },
       ),
     );

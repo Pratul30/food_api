@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/view%20models/restaurant.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/RestaurantCard.dart';
 
@@ -7,6 +9,7 @@ class RestaurantListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var res = Provider.of<RestaurantVM>(context).getRestaurant;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -16,7 +19,9 @@ class RestaurantListScreen extends StatelessWidget {
         backgroundColor: Color.fromRGBO(255, 102, 102, 0.85),
       ),
       body: ListView.builder(
-        itemBuilder: ((context, index) => RestaurantCard()),
+        itemBuilder: ((context, index) => Container(
+              child: Text('name: ${res[0].name}'),
+            )),
         itemCount: 3,
       ),
     );
