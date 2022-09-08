@@ -5,24 +5,21 @@ import 'package:flutter_app/app/helper.dart';
 import 'package:http/http.dart' as http;
 
 class MenuApi {
-
-  static Future<dynamic> getMenus() async {
+  static Future<dynamic> getMenus(String id) async {
     var response = await http.post(
-      Uri.parse(AppConstant.travelRestoApi), 
-      headers:  <String, String>{
+      Uri.parse(AppConstant.travelRestoApi),
+      headers: <String, String>{
         'Content-Type': 'application/json',
-        'X-RapidAPI-Key':  AppConstant.rapidKey,
-        'X-RapidAPI-Host':AppConstant.rapidHost
+        'X-RapidAPI-Key': AppConstant.rapidKey,
+        'X-RapidAPI-Host': AppConstant.rapidHost
       },
-      body:jsonEncode(<String, dynamic>{
-        "contentId":"58dcec40-99dd-4420-851c-75d9aa007e0a",
-        "reservationTime":"2022-03-07T20:00",
-        "partySize":2
+      body: jsonEncode(<String, dynamic>{
+        "contentId": "$id",
+        "reservationTime": "2022-03-07T20:00",
+        "partySize": 2
       }),
     );
     // .timeout(Duration(seconds: 2));
     return AppHelper.response(response.body, response.statusCode);
   }
-
-  
 }

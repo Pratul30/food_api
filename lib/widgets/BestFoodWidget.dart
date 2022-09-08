@@ -37,16 +37,18 @@ class BestFoodTitle extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Explore all ${restaurants.length} nearby restaurants',
+            'Top Nearby restaurants',
             style: TextStyle(fontSize: 20),
           ),
           FlatButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed('Restaurant_list');
-            },
-            child: Text('Explore'),
-            textColor: Colors.orange,
-          )
+              onPressed: () {
+                Navigator.of(context).pushNamed('Restaurant_list', arguments: {
+                  'cuisine': 'All',
+                  'list': restaurants,
+                });
+              },
+              child: Text('Explore All'),
+              textColor: Colors.orange)
         ],
       ),
     );
@@ -76,7 +78,7 @@ class BestFoodTiles extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        //Navigator.of(context).pushNamed('Restaurant_list');
+        Navigator.of(context).pushNamed('/menu', arguments: {'id': id});
         //Provider.of<RestaurantVM>(context, listen: false).printres();
       },
       child: Container(

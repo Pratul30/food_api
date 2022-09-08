@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../widgets/RestaurantCard.dart';
 
+import '../providers/models/restaurant.dart';
+
 class RestaurantListScreen extends StatelessWidget {
   const RestaurantListScreen({Key key}) : super(key: key);
 
@@ -11,24 +13,31 @@ class RestaurantListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var res = Provider.of<RestaurantVM>(context);
     var restaurants = res.getRestaurant;
+
+    final args =
+        ModalRoute.of(context).settings.arguments as Map<String, Object>;
+
+    final String cuisine = args.isEmpty ? '' : args['cuisine'];
+    final List<Restaurant> filterList = args.isEmpty ? [] : args['list'];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Nearby Restaurants',
+          'Nearby $cuisine Restaurants',
         ),
         brightness: Brightness.light,
-        backgroundColor: Color.fromRGBO(255, 102, 102, 0.85),
+        backgroundColor: Colors.orange,
       ),
       body: ListView.builder(
         itemBuilder: ((context, index) => RestaurantCard(
-              restaurants[index].id,
-              restaurants[index].name,
-              restaurants[index].info,
-              restaurants[index].imageUrl,
-              restaurants[index].rating,
-              restaurants[index].totalReviews,
+              filterList[index].id,
+              filterList[index].name,
+              filterList[index].info,
+              filterList[index].imageUrl,
+              filterList[index].rating,
+              filterList[index].totalReviews,
             )),
-        itemCount: restaurants.length,
+        itemCount: filterList.length,
       ),
     );
   }

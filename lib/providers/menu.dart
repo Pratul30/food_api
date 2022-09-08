@@ -78,11 +78,11 @@ class MenuVM extends ChangeNotifier {
     notifyListeners();
   }
 
-  getMenuList() async {
+  getMenuList(String id) async {
     print('loading....');
     loadingMenuList = true;
     try {
-      var data = await MenuApi.getMenus();
+      var data = await MenuApi.getMenus(id);
       if (data[2] >= 200 || data[2] <= 299) {
         menuList.clear();
         menuList = data[0]['data']['AppPresentation_queryAppDetailV2'][0]

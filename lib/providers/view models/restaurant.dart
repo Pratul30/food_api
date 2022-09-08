@@ -16,6 +16,8 @@ class RestaurantVM with ChangeNotifier {
     return [..._restaurants];
   }
 
+  bool loadingRestaurantList = false;
+
   void printres() async {
     final mainStr = _restaurants[0].imageUrl.substring(8);
     final encodedList = mainStr.split('/');
@@ -30,6 +32,7 @@ class RestaurantVM with ChangeNotifier {
   }
 
   Future<void> loadAllRestaurants() async {
+    loadingRestaurantList = true;
     var locObj = new Location();
     await locObj.getLocation();
     final Map<String, double> location = locObj.location;
@@ -77,11 +80,21 @@ class RestaurantVM with ChangeNotifier {
         ));
       });
       _restaurants.insertAll(0, tempRestaurants);
-      // print(_restaurants[0].name);
+      loadingRestaurantList = false;
       notifyListeners();
     } else {
       print('error');
     }
+  }
+
+  List<Restaurant> filterRestaurants(String cuisine) {
+    List<Restaurant> filterList = [];
+    _restaurants.forEach((element) {
+      if (element.info.contains(cuisine)) {
+        filterList.add(element);
+      }
+    });
+    return filterList;
   }
 
   //will provide all the list of restaurants

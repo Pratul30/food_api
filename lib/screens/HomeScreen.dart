@@ -12,7 +12,7 @@ import 'package:flutter_app/widgets/PopularFoodsWidget.dart';
 import 'package:flutter_app/widgets/SearchWidget.dart';
 import 'package:flutter_app/widgets/TopMenus.dart';
 
-import '../providers/location.dart';
+import '../widgets/loading.widget.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -34,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final res = Provider.of<RestaurantVM>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFFAFAFA),
@@ -58,19 +59,23 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SearchWidget(),
-            TopMenus(),
-            SizedBox(
-              height: 10,
+      body: res.loadingRestaurantList
+          ? Center(
+              child: LoadingWidget(),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  SearchWidget(),
+                  TopMenus(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  PopularFoodsWidget(),
+                  BestFoodWidget(),
+                ],
+              ),
             ),
-            PopularFoodsWidget(),
-            BestFoodWidget(),
-          ],
-        ),
-      ),
       bottomNavigationBar: BottomNavBarWidget(),
     );
   }

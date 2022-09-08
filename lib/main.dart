@@ -30,11 +30,22 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(fontFamily: 'Roboto', hintColor: Color(0xFFd0cece)),
+        theme: ThemeData(
+          fontFamily: 'Roboto',
+          //hintColor: Color(0xFFd0cece),
+          primaryColor: Colors.orange,
+        ),
         home: HomeScreen(),
         routes: {
           'Restaurant_list': (context) => RestaurantListScreen(),
-          'menu_list': (context) => MenuListScreen(),
+        },
+        onGenerateRoute: (settings) {
+          if (settings.name == '/menu') {
+            final value = settings.arguments; // Retrieve the value.
+            return MaterialPageRoute(
+                builder: (_) => MenuListScreen(value)); // Pass it to BarPage.
+          }
+          return null; // Let `onUnknownRoute` handle this behavior.
         },
       ),
     );

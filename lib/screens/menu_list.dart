@@ -4,7 +4,8 @@ import 'package:flutter_app/widgets/loading.widget.dart';
 import 'package:provider/provider.dart';
 
 class MenuListScreen extends StatefulWidget {
-  const MenuListScreen({Key key}) : super(key: key);
+  MenuListScreen(this.id);
+  final id;
 
   @override
   State<MenuListScreen> createState() => _MenuListScreenState();
@@ -14,7 +15,7 @@ class _MenuListScreenState extends State<MenuListScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<MenuVM>(context, listen: false).getMenuList();
+    Provider.of<MenuVM>(context, listen: false).getMenuList(widget.id['id']);
   }
 
   @override

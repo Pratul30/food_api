@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/menu.dart';
+import 'package:flutter_app/providers/view%20models/restaurant.dart';
 import 'package:provider/provider.dart';
+import '../providers/models/restaurant.dart';
 
 class TopMenus extends StatefulWidget {
   @override
@@ -40,9 +42,15 @@ class TopMenuTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final res = Provider.of<RestaurantVM>(context, listen: false);
+
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed('menu_list');
+        List<Restaurant> filterList = res.filterRestaurants(name);
+        Navigator.of(context).pushNamed('Restaurant_list', arguments: {
+          'cuisine': name,
+          'list': filterList,
+        });
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
