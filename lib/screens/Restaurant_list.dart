@@ -9,20 +9,26 @@ class RestaurantListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var res = Provider.of<RestaurantVM>(context).getRestaurant;
+    var res = Provider.of<RestaurantVM>(context);
+    var restaurants = res.getRestaurant;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Our restaurants',
+          'Nearby Restaurants',
         ),
         brightness: Brightness.light,
         backgroundColor: Color.fromRGBO(255, 102, 102, 0.85),
       ),
       body: ListView.builder(
-        itemBuilder: ((context, index) => Container(
-              child: Text('name: ${res[0].name}'),
+        itemBuilder: ((context, index) => RestaurantCard(
+              restaurants[index].id,
+              restaurants[index].name,
+              restaurants[index].info,
+              restaurants[index].imageUrl,
+              restaurants[index].rating,
+              restaurants[index].totalReviews,
             )),
-        itemCount: 3,
+        itemCount: restaurants.length,
       ),
     );
   }

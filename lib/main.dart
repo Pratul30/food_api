@@ -21,13 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<GeoIdVM>(
-          create: ((context) => GeoIdVM()),
-        ),
-        ChangeNotifierProxyProvider<GeoIdVM, RestaurantVM>(
-          create: (context) =>
-              RestaurantVM(Provider.of<GeoIdVM>(context, listen: false)),
-          update: (context, value, previous) => RestaurantVM(value),
+        ChangeNotifierProvider<RestaurantVM>(
+          create: ((context) => RestaurantVM()),
         ),
         ChangeNotifierProvider(
           create: ((context) => MenuVM()),

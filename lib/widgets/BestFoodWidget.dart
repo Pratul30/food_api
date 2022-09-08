@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/view%20models/restaurant.dart';
+import 'package:provider/provider.dart';
 
 class BestFoodWidget extends StatefulWidget {
   @override
@@ -26,18 +28,25 @@ class _BestFoodWidgetState extends State<BestFoodWidget> {
 class BestFoodTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+    var res = Provider.of<RestaurantVM>(context);
+    var restaurants = res.getRestaurant;
+
+    return Padding(
+      padding: const EdgeInsets.only(left: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
+        children: [
           Text(
-            "Best Foods",
-            style: TextStyle(
-                fontSize: 20,
-                color: Color(0xFF3a3a3b),
-                fontWeight: FontWeight.w300),
+            'Explore all ${restaurants.length} nearby restaurants',
+            style: TextStyle(fontSize: 20),
           ),
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed('Restaurant_list');
+            },
+            child: Text('Explore'),
+            textColor: Colors.orange,
+          )
         ],
       ),
     );
@@ -45,56 +54,69 @@ class BestFoodTitle extends StatelessWidget {
 }
 
 class BestFoodTiles extends StatelessWidget {
-  String name;
-  String imageUrl;
-  String rating;
-  String numberOfRating;
-  String price;
-  String slug;
+  final String name;
+  final id;
+  final String info;
+  final String imageUrl;
+  final rating;
 
-  BestFoodTiles(
-      {Key key,
-      @required this.name,
-      @required this.imageUrl,
-      @required this.rating,
-      @required this.numberOfRating,
-      @required this.price,
-      @required this.slug})
-      : super(key: key);
+  BestFoodTiles({
+    Key key,
+    this.name,
+    this.imageUrl,
+    this.rating,
+    this.info,
+    this.id,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final image = imageUrl.replaceFirst('{width}', '1000');
+    final imageSrc = image.replaceFirst('{height}', '1000');
+
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed('Restaurant_list');
+        //Navigator.of(context).pushNamed('Restaurant_list');
+        //Provider.of<RestaurantVM>(context, listen: false).printres();
       },
-      child: Column(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(left: 10, right: 5, top: 5, bottom: 5),
-            decoration: BoxDecoration(
-              boxShadow: [
-                /* BoxShadow(
-                color: Color(0xFFfae3e2),
-                blurRadius: 15.0,
-                offset: Offset(0, 0.75),
-              ),*/
-              ],
-            ),
-            child: Card(
-              semanticContainer: true,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              child: Image.asset(
-                'assets/images/bestfood/' + imageUrl + ".jpeg",
+      child: Container(
+        height: 200,
+        margin: EdgeInsets.all(10),
+        child: Card(
+          semanticContainer: true,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          child: Stack(
+            children: [
+              Image.network(
+                imageSrc,
+                fit: BoxFit.cover,
+                width: double.infinity,
               ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
+              Positioned(
+                right: 0,
+                bottom: 10,
+                child: Container(
+                  height: 50,
+                  width: 250,
+                  padding: EdgeInsets.only(top: 10, left: 10),
+                  color: Colors.black54,
+                  child: Text(
+                    name.substring(3),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        overflow: TextOverflow.ellipsis),
+                  ),
+                ),
               ),
-              elevation: 1,
-              margin: EdgeInsets.all(5),
-            ),
+            ],
           ),
-        ],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          elevation: 1,
+          margin: EdgeInsets.all(5),
+        ),
       ),
     );
   }
@@ -103,86 +125,18 @@ class BestFoodTiles extends StatelessWidget {
 class BestFoodList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        BestFoodTiles(
-            name: "Fried Egg",
-            imageUrl: "ic_best_food_8",
-            rating: '4.9',
-            numberOfRating: '200',
-            price: '15.06',
-            slug: "fried_egg"),
-        BestFoodTiles(
-            name: "Mixed vegetable",
-            imageUrl: "ic_best_food_9",
-            rating: "4.9",
-            numberOfRating: "100",
-            price: "17.03",
-            slug: ""),
-        BestFoodTiles(
-            name: "Salad with chicken meat",
-            imageUrl: "ic_best_food_10",
-            rating: "4.0",
-            numberOfRating: "50",
-            price: "11.00",
-            slug: ""),
-        BestFoodTiles(
-            name: "New mixed salad",
-            imageUrl: "ic_best_food_5",
-            rating: "4.00",
-            numberOfRating: "100",
-            price: "11.10",
-            slug: ""),
-        BestFoodTiles(
-            name: "Red meat with salad",
-            imageUrl: "ic_best_food_1",
-            rating: "4.6",
-            numberOfRating: "150",
-            price: "12.00",
-            slug: ""),
-        BestFoodTiles(
-            name: "New mixed salad",
-            imageUrl: "ic_best_food_2",
-            rating: "4.00",
-            numberOfRating: "100",
-            price: "11.10",
-            slug: ""),
-        BestFoodTiles(
-            name: "Potato with meat fry",
-            imageUrl: "ic_best_food_3",
-            rating: "4.2",
-            numberOfRating: "70",
-            price: "23.0",
-            slug: ""),
-        BestFoodTiles(
-            name: "Fried Egg",
-            imageUrl: "ic_best_food_4",
-            rating: '4.9',
-            numberOfRating: '200',
-            price: '15.06',
-            slug: "fried_egg"),
-        BestFoodTiles(
-            name: "Red meat with salad",
-            imageUrl: "ic_best_food_5",
-            rating: "4.6",
-            numberOfRating: "150",
-            price: "12.00",
-            slug: ""),
-        BestFoodTiles(
-            name: "Red meat with salad",
-            imageUrl: "ic_best_food_6",
-            rating: "4.6",
-            numberOfRating: "150",
-            price: "12.00",
-            slug: ""),
-        BestFoodTiles(
-            name: "Red meat with salad",
-            imageUrl: "ic_best_food_7",
-            rating: "4.6",
-            numberOfRating: "150",
-            price: "12.00",
-            slug: ""),
-      ],
+    var res = Provider.of<RestaurantVM>(context);
+    var restaurants = res.getRestaurant;
+
+    return ListView.builder(
+      itemBuilder: (context, index) => BestFoodTiles(
+        name: restaurants[index].name,
+        id: restaurants[index].id,
+        imageUrl: restaurants[index].imageUrl,
+        info: restaurants[index].info,
+        rating: restaurants[index].rating,
+      ),
+      itemCount: 5,
     );
   }
 }

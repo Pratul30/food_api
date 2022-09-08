@@ -5,15 +5,23 @@ import 'package:provider/provider.dart';
 import '../providers/view models/geoId.dart';
 
 class RestaurantCard extends StatelessWidget {
-  RestaurantCard(this.name, this.id);
+  RestaurantCard(this.id, this.name, this.info, this.imageUrl, this.rating,
+      this.totalreviews);
 
   final name;
   final id;
+  final String info;
+  final String imageUrl;
+  final rating;
+  final totalreviews;
 
   @override
   Widget build(BuildContext context) {
+    final image = imageUrl.replaceFirst('{width}', '1000');
+    final imageSrc = image.replaceFirst('{height}', '1000');
+
     return Container(
-      height: 200,
+      height: 250,
       margin: EdgeInsets.only(
         top: 20,
         left: 10,
@@ -21,7 +29,49 @@ class RestaurantCard extends StatelessWidget {
       ),
       width: double.infinity,
       child: Card(
-        child: Text('name: $name , contentId: $id'),
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 8,
+              child: Image.network(
+                imageSrc,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      name,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Text('$rating'),
+                        Icon(Icons.star),
+                      ],
+                    ),
+                    Text(
+                      info.substring(0, info.lastIndexOf('\$') + 1),
+                      style: TextStyle(overflow: TextOverflow.ellipsis),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
         elevation: 5,
       ),
     );

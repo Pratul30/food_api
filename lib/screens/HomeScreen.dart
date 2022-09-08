@@ -28,10 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void getUserGeoId() async {
-    final geoObj = new GeoIdVM();
-    await geoObj.getGeoId();
-    print(geoObj.getgeoId);
-    final resObj = new RestaurantVM(geoObj);
+    var resObj = Provider.of<RestaurantVM>(context, listen: false);
     await resObj.loadAllRestaurants();
   }
 

@@ -8,7 +8,7 @@ import '../location.dart';
 class GeoIdVM with ChangeNotifier {
   // will provide the geoid of the user
 
-  int geoId;
+  int geoId = 0;
 
   int get getgeoId {
     return geoId;
