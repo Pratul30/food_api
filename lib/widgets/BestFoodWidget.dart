@@ -40,7 +40,7 @@ class BestFoodTitle extends StatelessWidget {
             'Top Nearby restaurants',
             style: TextStyle(fontSize: 20),
           ),
-          FlatButton(
+          ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushNamed('Restaurant_list', arguments: {
                   'cuisine': 'All',
@@ -48,7 +48,8 @@ class BestFoodTitle extends StatelessWidget {
                 });
               },
               child: Text('Explore All'),
-              textColor: Colors.orange)
+              // textColor: Colors.orange
+            )
         ],
       ),
     );
