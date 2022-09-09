@@ -24,12 +24,11 @@ class _MenuListScreenState extends State<MenuListScreen> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: Color.fromARGB(255, 252, 241, 241),
-          foregroundColor: Colors.grey[600],
+          backgroundColor: Colors.orange,
           title: Text("Menu list"),
           centerTitle: false,
         ),
-        backgroundColor: Color.fromARGB(255, 252, 241, 241),
+        //backgroundColor: Color.fromARGB(255, 252, 241, 241),
         body: menuList.loadingMenuList
             ? Center(child: LoadingWidget())
             : menuList.menuList.length != 0

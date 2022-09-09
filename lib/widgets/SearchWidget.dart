@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/view models/restaurant.dart';
+import '../providers/models/restaurant.dart';
 
 class SearchWidget extends StatelessWidget {
   @override
@@ -11,23 +14,32 @@ class SearchWidget extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
             borderSide: BorderSide(
               width: 0,
-              color: Color(0xFFfb3132),
+              color: Colors.orange,
               style: BorderStyle.none,
             ),
           ),
           filled: true,
           prefixIcon: Icon(
             Icons.search,
-            color: Color(0xFFfb3132),
+            color: Colors.orange,
           ),
           fillColor: Color(0xFFFAFAFA),
           suffixIcon: Icon(
             Icons.sort,
-            color: Color(0xFFfb3132),
+            color: Colors.orange,
           ),
           hintStyle: new TextStyle(color: Color(0xFFd0cece), fontSize: 18),
-          hintText: "What would your like to buy?",
+          hintText: "Enter any restaurant or cuisine",
         ),
+        onSubmitted: (value) {
+          List<Restaurant> filterList;
+          filterList = Provider.of<RestaurantVM>(context, listen: false)
+              .filterRestaurantsBySearch(value.toLowerCase());
+          Navigator.of(context).pushNamed('Restaurant_list', arguments: {
+            'cuisine': value,
+            'list': filterList,
+          });
+        },
       ),
     );
   }

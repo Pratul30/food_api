@@ -87,10 +87,24 @@ class RestaurantVM with ChangeNotifier {
     }
   }
 
-  List<Restaurant> filterRestaurants(String cuisine) {
+  List<Restaurant> filterRestaurantsByCuisine(String cuisine) {
     List<Restaurant> filterList = [];
     _restaurants.forEach((element) {
       if (element.info.contains(cuisine)) {
+        filterList.add(element);
+      }
+    });
+    return filterList;
+  }
+
+  List<Restaurant> filterRestaurantsBySearch(String keyword) {
+    List<Restaurant> filterList = [];
+    _restaurants.forEach((element) {
+      final infoLowerCase = element.info.toLowerCase();
+      final nameLowerCase = element.name.toLowerCase();
+      if (infoLowerCase.contains(keyword)) {
+        filterList.add(element);
+      } else if (nameLowerCase.contains(keyword)) {
         filterList.add(element);
       }
     });

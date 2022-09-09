@@ -38,7 +38,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
         ),
       ],
       currentIndex: _selectedIndex,
-      selectedItemColor: Color(0xFFfd5352),
+      selectedItemColor: Colors.orange,
       onTap: _onItemTapped,
     );
   }

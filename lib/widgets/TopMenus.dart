@@ -12,21 +12,53 @@ class TopMenus extends StatefulWidget {
 class _TopMenusState extends State<TopMenus> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<MenuVM>(builder: (context, value, _) {
-      return Container(
-        height: 100,
-        child: ListView.builder(
-          itemCount: value.menu.length,
-          itemBuilder: (BuildContext context, int index) {
-            return TopMenuTiles(
-              name: value.menu[index].name,
-              imageUrl: value.menu[index].imageUrl,
+    return Container(
+      height: 200,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 10,
+              top: 10,
+              bottom: 5,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Restaurants By',
+                  style: TextStyle(
+                    fontSize: 20,
+                    letterSpacing: 2,
+                  ),
+                ),
+                Text(
+                  'Cuisines...',
+                  style: TextStyle(
+                      fontSize: 25, letterSpacing: 3, color: Colors.orange),
+                )
+              ],
+            ),
+          ),
+          Consumer<MenuVM>(builder: (context, value, _) {
+            return Container(
+              height: 125,
+              child: ListView.builder(
+                itemCount: value.menu.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return TopMenuTiles(
+                    name: value.menu[index].name,
+                    imageUrl: value.menu[index].imageUrl,
+                  );
+                },
+                scrollDirection: Axis.horizontal,
+              ),
             );
-          },
-          scrollDirection: Axis.horizontal,
-        ),
-      );
-    });
+          }),
+        ],
+      ),
+    );
   }
 }
 
@@ -46,7 +78,7 @@ class TopMenuTiles extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        List<Restaurant> filterList = res.filterRestaurants(name);
+        List<Restaurant> filterList = res.filterRestaurantsByCuisine(name);
         Navigator.of(context).pushNamed('Restaurant_list', arguments: {
           'cuisine': name,
           'list': filterList,
@@ -58,30 +90,30 @@ class TopMenuTiles extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
             decoration: new BoxDecoration(
-              boxShadow: [
-                new BoxShadow(
-                  color: Color(0xFFfae3e2),
-                  blurRadius: 25.0,
-                  offset: Offset(0.0, 0.75),
+                // boxShadow: [
+                //   new BoxShadow(
+                //     color: Colors.orange[100],
+                //     blurRadius: 25.0,
+                //     offset: Offset(0.0, 0.75),
+                //   ),
+                // ],
                 ),
-              ],
-            ),
             child: Card(
               color: Colors.white,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(3.0),
-                ),
-              ),
+              elevation: 5,
+              // shape: RoundedRectangleBorder(
+              //   borderRadius: const BorderRadius.all(
+
+              //   ),
+              // ),
               child: Container(
-                width: 50,
-                height: 50,
+                width: 70,
+                height: 70,
                 child: Center(
                   child: Image.asset(
                     imageUrl,
-                    width: 24,
-                    height: 24,
+                    width: 50,
+                    height: 50,
                   ),
                 ),
               ),
