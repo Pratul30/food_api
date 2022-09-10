@@ -7,4 +7,5 @@ class AppConstant {
 
   static const rapidKey = 'c553073fa6msh2884ed7bd6dc2b3p15e9a7jsn165c9950d59c';
   static const rapidHost = 'travel-advisor.p.rapidapi.com';
+  static const backendApi = '';
 }

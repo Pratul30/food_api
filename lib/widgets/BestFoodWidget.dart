@@ -40,16 +40,16 @@ class BestFoodTitle extends StatelessWidget {
             'Top Nearby restaurants',
             style: TextStyle(fontSize: 20),
           ),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('Restaurant_list', arguments: {
-                  'cuisine': 'All',
-                  'list': restaurants,
-                });
-              },
-              child: Text('Explore All'),
-              // textColor: Colors.orange
-            )
+
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed('Restaurant_list', arguments: {
+                'cuisine': 'All',
+                'list': restaurants,
+              });
+            },
+            child: Text('Explore All'),
+          )
         ],
       ),
     );
