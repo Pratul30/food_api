@@ -18,3 +18,7 @@ yarn-error.log*
 
 #vscode files
 .vscode/
+
+#heroku
+npm-debug.log
+.DS_Store
