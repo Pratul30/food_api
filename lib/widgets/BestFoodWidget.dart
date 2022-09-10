@@ -11,7 +11,7 @@ class _BestFoodWidgetState extends State<BestFoodWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
+      height: 350,
       width: double.infinity,
       child: Column(
         children: <Widget>[
@@ -31,7 +31,13 @@ class BestFoodTitle extends StatelessWidget {
     var res = Provider.of<RestaurantVM>(context);
     var restaurants = res.getRestaurant;
 
-    return Padding(
+    return Container(
+      // decoration: BoxDecoration(boxShadow: [
+      //   BoxShadow(
+      //       color: Color.fromARGB(255, 255, 239, 211),
+      //       blurRadius: 10,
+      //       blurStyle: BlurStyle.normal),
+      // ]),
       padding: const EdgeInsets.only(left: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,7 +46,6 @@ class BestFoodTitle extends StatelessWidget {
             'Top Nearby restaurants',
             style: TextStyle(fontSize: 20),
           ),
-
           TextButton(
             onPressed: () {
               Navigator.of(context).pushNamed('Restaurant_list', arguments: {
@@ -48,7 +53,10 @@ class BestFoodTitle extends StatelessWidget {
                 'list': restaurants,
               });
             },
-            child: Text('Explore All'),
+            child: Text(
+              'Explore All',
+              style: TextStyle(fontSize: 17, color: Colors.orange),
+            ),
           )
         ],
       ),
@@ -76,52 +84,89 @@ class BestFoodTiles extends StatelessWidget {
   Widget build(BuildContext context) {
     final image = imageUrl.replaceFirst('{width}', '1000');
     final imageSrc = image.replaceFirst('{height}', '1000');
+    final String affordability = info.substring(0, info.indexOf('â') - 1);
+    final String cuisines =
+        info.substring(info.indexOf('¢') + 2).replaceAll('â¢', '•');
 
     return InkWell(
-      onTap: () {
-        Navigator.of(context).pushNamed('/menu', arguments: {'id': id});
-        //Provider.of<RestaurantVM>(context, listen: false).printres();
-      },
-      child: Container(
-        height: 200,
-        margin: EdgeInsets.all(10),
-        child: Card(
-          semanticContainer: true,
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: Stack(
+        onTap: () {
+          Navigator.of(context).pushNamed('/menu', arguments: {'id': id});
+          print(info);
+          //Provider.of<RestaurantVM>(context, listen: false).printres();
+        },
+        child: Container(
+          padding: EdgeInsets.all(10),
+          height: 175,
+          width: double.infinity,
+          child: Row(
+            // mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.network(
-                imageSrc,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
-              Positioned(
-                right: 0,
-                bottom: 10,
+              Expanded(
+                flex: 4,
                 child: Container(
-                  height: 50,
-                  width: 250,
-                  padding: EdgeInsets.only(top: 10, left: 10),
-                  color: Colors.black54,
-                  child: Text(
-                    name.substring(3),
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        overflow: TextOverflow.ellipsis),
+                  height: double.infinity,
+                  child: Card(
+                    clipBehavior: Clip.antiAlias,
+                    child: Image.network(
+                      imageSrc,
+                      fit: BoxFit.cover,
+                    ),
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
                   ),
                 ),
               ),
+              Expanded(
+                  flex: 5,
+                  child: Container(
+                    height: double.infinity,
+                    padding: EdgeInsets.only(
+                      left: 10,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          name.substring(3),
+                          maxLines: 1,
+                          style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.orange,
+                              fontFamily: 'Times New Roman',
+                              fontWeight: FontWeight.bold,
+                              overflow: TextOverflow.ellipsis),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          cuisines,
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(affordability),
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Text(
+                              rating.toString(),
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            Icon(Icons.star, color: Colors.yellow[700]),
+                          ],
+                        )
+                      ],
+                    ),
+                  ))
             ],
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          elevation: 1,
-          margin: EdgeInsets.all(5),
-        ),
-      ),
-    );
+        ));
   }
 }
 

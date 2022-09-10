@@ -35,30 +35,31 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final res = Provider.of<RestaurantVM>(context);
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFFFAFAFA),
-        elevation: 0,
-        title: Text(
-          "What would you like to eat?",
-          style: TextStyle(
-              color: Color(0xFF3a3737),
-              fontSize: 16,
-              fontWeight: FontWeight.w500),
-        ),
-        brightness: Brightness.light,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.notifications_none,
-              color: Color(0xFF3a3737),
-            ),
-            onPressed: () {
-              Navigator.push(context, ScaleRoute(page: SignInScreen()));
-            },
-          )
-        ],
+    final appBar = AppBar(
+      backgroundColor: Color(0xFFFAFAFA),
+      elevation: 0,
+      title: Text(
+        "What would you like to eat?",
+        style: TextStyle(
+            color: Color(0xFF3a3737),
+            fontSize: 16,
+            fontWeight: FontWeight.w500),
       ),
+      brightness: Brightness.light,
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(
+            Icons.notifications_none,
+            color: Color(0xFF3a3737),
+          ),
+          onPressed: () {
+            Navigator.push(context, ScaleRoute(page: SignInScreen()));
+          },
+        )
+      ],
+    );
+    return Scaffold(
+      appBar: appBar,
       body: res.loadingRestaurantList
           ? Center(
               child: LoadingWidget(),

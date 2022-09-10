@@ -16,29 +16,34 @@ class GeoIdVM with ChangeNotifier {
 
   Future<void> getGeoId() async {
     var locObj = new Location();
-    await locObj.getLocation();
-    final Map<String, double> location = locObj.location;
-
-    final url = Uri.https(
-      'travel-advisor.p.rapidapi.com',
-      '/restaurants/list-by-latlng',
-      {
-        'latitude': location['latitude'],
-        'longitude': location['longitude'],
-        'limit': 30,
-        'currency': 'USD',
-        'distance': 2,
-        'open_now': false,
-        'lunit': 'km',
-        'lang': 'en_US'
-      }.map((key, value) => MapEntry(key, value.toString())),
-    );
-    final response = await http.get(url, headers: {
-      'X-RapidAPI-Key': '1be9677502msh0742fed2f9b77c6p1218d6jsn2d1420205cf8',
-      'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com',
-    });
-    final res = json.decode(response.body);
-    geoId = int.parse(res['data'][0]['ranking_geo_id']);
-    notifyListeners();
+    try {
+      await locObj.getLocation();
+      final Map<String, double> location = locObj.location;
+      print(location['latitude']);
+      final url = Uri.https(
+        'travel-advisor.p.rapidapi.com',
+        '/restaurants/list-by-latlng',
+        {
+          'latitude': location['latitude'],
+          'longitude': location['longitude'],
+          'limit': 30,
+          'currency': 'USD',
+          'distance': 2,
+          'open_now': false,
+          'lunit': 'km',
+          'lang': 'en_US'
+        }.map((key, value) => MapEntry(key, value.toString())),
+      );
+      final response = await http.get(url, headers: {
+        'X-RapidAPI-Key': '1be9677502msh0742fed2f9b77c6p1218d6jsn2d1420205cf8',
+        'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com',
+      });
+      final res = json.decode(response.body);
+      geoId = int.parse(res['data'][0]['ranking_geo_id']);
+      print(geoId);
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
   }
 }

@@ -7,16 +7,20 @@ class Location {
   Map<String, double> userLocation = {};
 
   Future<void> getLocation() async {
-    final permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) {
-      print('denied');
-      return;
+    try {
+      final permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        print('denied');
+        return;
+      }
+      final res = await Geolocator.getCurrentPosition();
+      userLocation.addAll({
+        'latitude': res.latitude,
+        'longitude': res.longitude,
+      });
+    } catch (e) {
+      print('get $e');
     }
-    final res = await Geolocator.getCurrentPosition();
-    userLocation.addAll({
-      'latitude': res.latitude,
-      'longitude': res.longitude,
-    });
   }
 
   Map<String, double> get location {
