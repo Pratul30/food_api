@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/providers/view%20models/geoId.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/providers/view%20models/restaurant.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_app/animation/ScaleRoute.dart';
-import 'package:flutter_app/screens/SignInScreen.dart';
 import 'package:flutter_app/widgets/BestFoodWidget.dart';
 import 'package:flutter_app/widgets/BottomNavBarWidget.dart';
-import 'package:flutter_app/widgets/PopularFoodsWidget.dart';
 import 'package:flutter_app/widgets/SearchWidget.dart';
 import 'package:flutter_app/widgets/TopMenus.dart';
 
@@ -45,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
             fontSize: 16,
             fontWeight: FontWeight.w500),
       ),
-      brightness: Brightness.light,
       actions: <Widget>[
         IconButton(
           icon: Icon(
@@ -53,10 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Color(0xFF3a3737),
           ),
           onPressed: () {
-            Navigator.push(context, ScaleRoute(page: SignInScreen()));
           },
         )
-      ],
+      ], systemOverlayStyle: SystemUiOverlayStyle.dark,
     );
     return Scaffold(
       appBar: appBar,

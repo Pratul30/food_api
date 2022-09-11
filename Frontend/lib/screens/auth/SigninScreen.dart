@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/auth.dart';
-import 'package:flutter_app/widgets/loading.widget.dart';
 import 'package:flutter_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +18,6 @@ class SigninScreen extends StatefulWidget {
 class _SigninScreenState extends State<SigninScreen> {
   final _formKey = GlobalKey<FormState>();
   var showPwd = true;
-  
 
   Future<dynamic> submit(BuildContext ctx) async {
 
@@ -27,17 +25,16 @@ class _SigninScreenState extends State<SigninScreen> {
       FocusScope.of(context).requestFocus(FocusNode());
 
       /// if validate is not true return null
-      // if (!_formKey.currentState.validate()) 
-      //   return;
+      if (!_formKey.currentState.validate()) 
+        return;
 
-      // /// else save state and passing data to http
-      // _formKey.currentState.save();
-      // var data = {'email': email.text, 'password': password.text};
-      // await Provider.of<AuthVM>(context, listen: false).signin(data);
+      /// else save state and passing data to http
+      _formKey.currentState.save();
+      var data = {'email': email.text, 'password': password.text};
+      await Provider.of<AuthVM>(ctx, listen: false).signin(data);
 
-
-      Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
   }
+
 
 
 
@@ -45,7 +42,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authState = Provider.of<AuthVM>(context, listen: true);
+    final authState = Provider.of<AuthVM>(context);
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0, 
@@ -109,7 +106,7 @@ class _SigninScreenState extends State<SigninScreen> {
                           "Forgot password?",
                           style: TextStyle(
                             fontSize: 14.0,
-                            color: Colors.orange[600],
+                            color: Colors.grey[600],
                             decoration: TextDecoration.underline
                           ),
                         ),
@@ -123,7 +120,14 @@ class _SigninScreenState extends State<SigninScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: ui.button(
                     child: authState.isLoading
-                      ? LoadingWidget()
+                      ? SizedBox(
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                            strokeWidth: 3.0,
+                          ),
+                          height: 30,
+                          width: 30,
+                        )
                       :  Text(
                           "Signin",
                           style: TextStyle(
@@ -132,12 +136,22 @@ class _SigninScreenState extends State<SigninScreen> {
                             color: Colors.white
                           ),
                         ),
-                    width: double.infinity,
-                    color:  Colors.orange,
-                    overColor:Colors.white,
-                    onPressed: (){
-                      submit(context);
-                    }
+                        width: double.infinity,
+                        color:  Colors.orange,
+                        overColor:Colors.white,
+                        onPressed: () async {
+                          await submit(context);
+                          print(authState.status);
+                          if(authState.error != ""){
+                            WidgetsUi().toast(
+                              context: context,
+                              message: authState.error,
+                              bColor: Colors.red
+                            );
+                          } else if(authState.status == 200){
+                            Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+                          }
+                        }
                   ),
                 ),
 
@@ -149,10 +163,10 @@ class _SigninScreenState extends State<SigninScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children:[
                       Text(
-                        "You don\'t have an account?",
+                        "Don\'t you have an account?",
                         style: TextStyle(
                           fontSize: 14.0,
-                          color: Colors.orange[600],
+                          color: Colors.grey[600],
                         ),
                       ),
                       TextButton(

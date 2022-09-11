@@ -50,6 +50,21 @@ class WidgetsUi{
   }
 
 
+  ScaffoldFeatureController toast({BuildContext context, String message, Color textColor = Colors.white , Color bColor = Colors.black}){
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: TextStyle(
+            color: textColor
+          ),
+        ),
+        backgroundColor: bColor,
+      )
+    );
+  }
+
+
 
 
       // button ui design

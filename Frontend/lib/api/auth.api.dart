@@ -8,7 +8,7 @@ class AuthApi {
 
   static Future<dynamic> signin(dynamic data) async {
     var response = await http.post(
-      Uri.parse("${AppConstant.backendApi}/signin"),
+      Uri.parse("${AppConstant.backendApi}/user/login"),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -19,7 +19,7 @@ class AuthApi {
 
   static Future<dynamic> signup(dynamic data) async {
     var response = await http.post(
-      Uri.parse("${AppConstant.backendApi}/signup"),
+      Uri.parse("${AppConstant.backendApi}/user/register"),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -44,6 +44,17 @@ class AuthApi {
   static Future<dynamic> profil() async {
     var response = await http.get(
       Uri.parse("${AppConstant.backendApi}/profil"),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer token'
+      },
+    );
+    return AppHelper.response(response.body, response.statusCode);
+  }
+
+  static Future<dynamic> refresh() async {
+    var response = await http.get(
+      Uri.parse("${AppConstant.backendApi}/user/refresh"),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'Authorization': 'Bearer token'
