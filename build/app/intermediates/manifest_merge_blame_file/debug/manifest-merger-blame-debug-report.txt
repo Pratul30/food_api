@@ -1,0 +1,103 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.flutter_app"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+9        android:targetSdkVersion="28" />
+10    <!--
+11         Flutter needs it to communicate with the running application
+12         to allow setting breakpoints, to provide hot reload, etc.
+13    -->
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->C:\Users\Pratul\Flutter\food_api\android\app\src\debug\AndroidManifest.xml:6:5-66
+14-->C:\Users\Pratul\Flutter\food_api\android\app\src\debug\AndroidManifest.xml:6:22-64
+15    <!--
+16     io.flutter.app.FlutterApplication is an android.app.Application that
+17         calls FlutterMain.startInitialization(this); in its onCreate method.
+18         In most cases you can leave this as-is, but you if you want to provide
+19         additional functionality it is fine to subclass or reimplement
+20         FlutterApplication and put your custom class here.
+21    -->
+22    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+22-->C:\Users\Pratul\Flutter\food_api\android\app\src\main\AndroidManifest.xml:8:5-79
+22-->C:\Users\Pratul\Flutter\food_api\android\app\src\main\AndroidManifest.xml:8:22-76
+23    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+23-->C:\Users\Pratul\Flutter\food_api\android\app\src\main\AndroidManifest.xml:9:5-85
+23-->C:\Users\Pratul\Flutter\food_api\android\app\src\main\AndroidManifest.xml:9:22-82
+24    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+24-->[:geolocator_android] C:\Users\Pratul\Flutter\food_api\build\geolocator_android\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-77
+24-->[:geolocator_android] C:\Users\Pratul\Flutter\food_api\build\geolocator_android\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-74
+25
+26    <application
+27        android:name="android.app.Application"
+28        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+28-->[androidx.core:core:1.8.0] C:\Users\Pratul\.gradle\caches\transforms-3\c27ba4171e3ff0d46835b70ea5cfac8b\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
+29        android:debuggable="true"
+30        android:icon="@mipmap/ic_launcher"
+31        android:label="flutter_app" >
+32        <activity
+33            android:name="com.example.flutter_app.MainActivity"
+34            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+35            android:hardwareAccelerated="true"
+36            android:launchMode="singleTop"
+37            android:theme="@style/LaunchTheme"
+38            android:windowSoftInputMode="adjustResize" >
+39            <intent-filter>
+40                <action android:name="android.intent.action.MAIN" />
+41
+42                <category android:name="android.intent.category.LAUNCHER" />
+43            </intent-filter>
+44        </activity>
+45        <!--
+46             Don't delete the meta-data below.
+47             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+48        -->
+49        <meta-data
+50            android:name="flutterEmbedding"
+51            android:value="2" />
+52
+53        <service
+53-->[:geolocator_android] C:\Users\Pratul\Flutter\food_api\build\geolocator_android\intermediates\library_manifest\debug\AndroidManifest.xml:10:9-14:56
+54            android:name="com.baseflow.geolocator.GeolocatorLocationService"
+54-->[:geolocator_android] C:\Users\Pratul\Flutter\food_api\build\geolocator_android\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-77
+55            android:enabled="true"
+55-->[:geolocator_android] C:\Users\Pratul\Flutter\food_api\build\geolocator_android\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-35
+56            android:exported="false"
+56-->[:geolocator_android] C:\Users\Pratul\Flutter\food_api\build\geolocator_android\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-37
+57            android:foregroundServiceType="location" />
+57-->[:geolocator_android] C:\Users\Pratul\Flutter\food_api\build\geolocator_android\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-53
+58
+59        <uses-library
+59-->[androidx.window:window:1.0.0-beta04] C:\Users\Pratul\.gradle\caches\transforms-3\6baaecc6d64f853d474cf370f2d5da15\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+60            android:name="androidx.window.extensions"
+60-->[androidx.window:window:1.0.0-beta04] C:\Users\Pratul\.gradle\caches\transforms-3\6baaecc6d64f853d474cf370f2d5da15\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+61            android:required="false" />
+61-->[androidx.window:window:1.0.0-beta04] C:\Users\Pratul\.gradle\caches\transforms-3\6baaecc6d64f853d474cf370f2d5da15\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+62        <uses-library
+62-->[androidx.window:window:1.0.0-beta04] C:\Users\Pratul\.gradle\caches\transforms-3\6baaecc6d64f853d474cf370f2d5da15\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+63            android:name="androidx.window.sidecar"
+63-->[androidx.window:window:1.0.0-beta04] C:\Users\Pratul\.gradle\caches\transforms-3\6baaecc6d64f853d474cf370f2d5da15\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+64            android:required="false" />
+64-->[androidx.window:window:1.0.0-beta04] C:\Users\Pratul\.gradle\caches\transforms-3\6baaecc6d64f853d474cf370f2d5da15\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+65
+66        <activity
+66-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Pratul\.gradle\caches\transforms-3\fff3b22769ba4143dfed92c0c02685a8\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+67            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+67-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Pratul\.gradle\caches\transforms-3\fff3b22769ba4143dfed92c0c02685a8\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+68            android:exported="false"
+68-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Pratul\.gradle\caches\transforms-3\fff3b22769ba4143dfed92c0c02685a8\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+69            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+69-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Pratul\.gradle\caches\transforms-3\fff3b22769ba4143dfed92c0c02685a8\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+70
+71        <meta-data
+71-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\Pratul\.gradle\caches\transforms-3\c663dd98b2b3bb246f1b74caf94fdc16\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:21:9-23:69
+72            android:name="com.google.android.gms.version"
+72-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\Pratul\.gradle\caches\transforms-3\c663dd98b2b3bb246f1b74caf94fdc16\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:22:13-58
+73            android:value="@integer/google_play_services_version" />
+73-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\Pratul\.gradle\caches\transforms-3\c663dd98b2b3bb246f1b74caf94fdc16\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:23:13-66
+74    </application>
+75
+76</manifest>
