@@ -1,85 +1,86 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_app/api/auth.api.dart';
 
 
 
-class AuthVM extends ChangeNotifier {
+class AuthVM with ChangeNotifier {
 
 
-  bool isLoading = false;
-  String error = "";
+  bool _loading = false;
+  String _error = "";
+  int _status = 100;
+  
+
+  bool get isLoading => _loading;
+  String get error => _error;
+  int get status => _status;
+
+
+  setState(bool value, String err, int sttus){
+    _loading = value;
+    _error = err;
+    _status = sttus;
+    notifyListeners();
+  }
 
   signin(dynamic data) async {
-    print('loading....');
-    isLoading = true;
+    setState(true, "", 100);
     try {
       var resp = await AuthApi.signin(data);
-      if (resp[2] >= 200 || data[2] <= 299) {
-
+      print(resp);
+      if (resp[2] >= 200 && resp[2] <= 299) {
+        setState(false, "", 200);
       } else {
-        error = data[1];
+        setState(false, resp[1].toString(), resp[2]);
       }
     } on Exception catch (e) {
       debugPrint('[ON EXCEPTION CATCH]\n$e');
-      error = e.toString();
+      setState(false, e.toString(), 500);
     } on Error catch (e) {
       debugPrint('[ON ERROR CATCH]\n$e');
-      error = e.toString();
-    } finally {
-      isLoading = false;
-      print('fianlly...');
+      setState(false, e.toString(), 500);
     }
-    notifyListeners();
   }
 
 
 
   signup(dynamic data) async {
-    print('loading....');
-    isLoading = true;
+    setState(true, "", 100);
     try {
       var resp = await AuthApi.signup(data);
-      if (resp[2] >= 200 || data[2] <= 299) {
-
+      if (resp[2] >= 200 && resp[2] <= 299) {
+        setState(false, "", 200);
       } else {
-        error = data[1];
+        print(resp[1]['message']);
+        setState(false, resp[1]['message'].toString(), resp[2]);
       }
     } on Exception catch (e) {
       debugPrint('[ON EXCEPTION CATCH]\n$e');
-      error = e.toString();
+      setState(false, "someting when wrong", 500);
     } on Error catch (e) {
       debugPrint('[ON ERROR CATCH]\n$e');
-      error = e.toString();
-    } finally {
-      isLoading = false;
-      print('fianlly...');
+      setState(false, e.toString(), 500);
     }
-    notifyListeners();
   }
 
 
 
   forgotPassword(dynamic data) async {
-    print('loading....');
-    isLoading = true;
+    setState(true, "", 100);
     try {
       var resp = await AuthApi.forgotPassword(data);
-      if (resp[2] >= 200 || data[2] <= 299) {
-
+      if (resp[2] >= 200 && resp[2] <= 299) {
+        setState(false, "", 200);
       } else {
-        error = data[1];
+        setState(false, resp[1].toString(), resp[2]);
       }
     } on Exception catch (e) {
       debugPrint('[ON EXCEPTION CATCH]\n$e');
-      error = e.toString();
+      setState(false, e.toString(), 500);
     } on Error catch (e) {
       debugPrint('[ON ERROR CATCH]\n$e');
-      error = e.toString();
-    } finally {
-      isLoading = false;
-      print('fianlly...');
+      setState(false, e.toString(), 500);
     }
-    notifyListeners();
   }
 
 

@@ -73,10 +73,6 @@ class MenuVM extends ChangeNotifier {
   var menuList = [];
   List<Menu> get menu => menuIcons;
 
-  setMenuList(bool status) {
-    loadingMenuList = status;
-    notifyListeners();
-  }
 
   getMenuList(String id) async {
     print('loading....');

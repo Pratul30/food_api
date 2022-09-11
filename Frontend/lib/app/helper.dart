@@ -6,19 +6,19 @@ class AppHelper {
   
   static List<dynamic> response(data, int status){
     if(isJsonParsable(data)){
-      if(status >= 200 || status <=299){
+      if(status >= 200 && status <=299){
         return [jsonDecode(data), "", status];
       }else {
         if(status == 408){
           return ["", "internet error", 408];
         }
-        if(jsonDecode(data) != null && jsonDecode(data)['error'] != null) {
-          return [ "", jsonDecode(data)['error'], status];
+        if(jsonDecode(data) != null) {
+          return ["", jsonDecode(data), status];
         }
-        return ['', 'an error', status];
+        return ['', 'something went wrong', status];
       }
     } 
-    return ['', 'an error', 500];
+    return ['', 'something went wrong', 500];
   }
 
 

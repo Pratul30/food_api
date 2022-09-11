@@ -1,3 +1,4 @@
+
 class AppConstant {
   /// travel-advisor restaurant details
   static const travelRestoApi =
@@ -7,5 +8,5 @@ class AppConstant {
 
   static const rapidKey = 'c553073fa6msh2884ed7bd6dc2b3p15e9a7jsn165c9950d59c';
   static const rapidHost = 'travel-advisor.p.rapidapi.com';
-  static const backendApi = '';
+  static const backendApi = 'https://pacific-atoll-44812.herokuapp.com';
 }

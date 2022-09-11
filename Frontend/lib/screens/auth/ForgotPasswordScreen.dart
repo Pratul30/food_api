@@ -125,10 +125,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children:[
                       Text(
-                        "You don\'t have an account?",
+                        "Don\'t you have an account?",
                         style: TextStyle(
                           fontSize: 14.0,
-                          color: Colors.orange[600],
+                          color: Colors.grey[600],
                         ),
                       ),
                       TextButton(

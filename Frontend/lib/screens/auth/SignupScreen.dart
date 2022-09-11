@@ -1,13 +1,15 @@
+import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/auth.dart';
-import 'package:flutter_app/widgets/loading.widget.dart';
 import 'package:flutter_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 final ui = WidgetsUi();
 
 final email = TextEditingController();
-final name = TextEditingController();
+final firstName = TextEditingController();
+final lastName = TextEditingController();
+final phone = TextEditingController();
 final password = TextEditingController();
 
 class SignupScreen extends StatefulWidget {
@@ -20,6 +22,10 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
   var showPwd = true;
+
+  String dialCode = '+224';
+  String country = 'GN';
+  final countryPicker = const FlCountryCodePicker();
   
 
   Future<dynamic> submit(BuildContext ctx) async {
@@ -33,7 +39,14 @@ class _SignupScreenState extends State<SignupScreen> {
 
       /// else save state and passing data to http
       _formKey.currentState.save();
-      var data = {'email': email.text, 'name': name.text, 'password': password.text};
+      var data = {
+        'email': email.text, 
+        'first_name': firstName.text, 
+        'last_name': lastName.text, 
+        'phone_number': dialCode+''+phone.text,
+        'country': country,
+        'password': password.text
+      };
       await Provider.of<AuthVM>(context, listen: false).signup(data);
   }
 
@@ -102,7 +115,14 @@ class _SignupScreenState extends State<SignupScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: ui.button(
                     child: authState.isLoading
-                      ? LoadingWidget()
+                      ? SizedBox(
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                            strokeWidth: 3.0,
+                          ),
+                          height: 30,
+                          width: 30,
+                        )
                       :  Text(
                           "Signup",
                           style: TextStyle(
@@ -114,8 +134,17 @@ class _SignupScreenState extends State<SignupScreen> {
                     width: double.infinity,
                     color:  Colors.orange,
                     overColor:Colors.white,
-                    onPressed: (){
-                      submit(context);
+                    onPressed: () async {
+                      await submit(context);
+                      if(authState.error != ""){
+                        WidgetsUi().toast(
+                          context: context,
+                          message: authState.error,
+                          bColor: Colors.red
+                        );
+                      } else if(authState.status == 200){
+                        Navigator.pop(context);
+                      }
                     }
                   ),
                 ),
@@ -135,6 +164,32 @@ class _SignupScreenState extends State<SignupScreen> {
         children: [
 
           ui.inputForm(
+            "First Name", 
+            nextInput: TextInputAction.next, 
+            validate: (v) {
+              if (v.isEmpty || v == null) return  "incorrect first name";
+            }, 
+            controller: firstName, 
+            onChange:(_) {},
+            iconL: const Icon(Icons.account_circle_outlined, color: Colors.orange),
+          ),
+
+          SizedBox(height: 20.0),
+
+          ui.inputForm(
+            "Last Name", 
+            nextInput: TextInputAction.next, 
+            validate: (v) {
+              if (v.isEmpty || v == null) return  "incorrect last name";
+            }, 
+            controller: lastName, 
+            onChange:(_) {},
+            iconL: const Icon(Icons.account_circle_outlined, color: Colors.orange),
+          ),
+
+          SizedBox(height: 20.0),
+
+          ui.inputForm(
             "Email", 
             nextInput: TextInputAction.next, 
             validate: (v) {
@@ -147,17 +202,38 @@ class _SignupScreenState extends State<SignupScreen> {
           ),
 
           SizedBox(height: 20.0),
-
-
           ui.inputForm(
-            "Name", 
+            "Phone Number", 
             nextInput: TextInputAction.next, 
             validate: (v) {
-              if (v.isEmpty || v == null) return  "incorrect name";
+              if (v.isEmpty || v == null) return  "incorrect phone number";
             }, 
-            controller: name, 
+            controller: phone, 
             onChange:(_) {},
-            iconL: const Icon(Icons.account_circle_outlined, color: Colors.orange),
+            iconL: GestureDetector(
+              onTap: () async {
+                  final code = await countryPicker.showPicker(context: context);
+                  if (code != null)  {
+                    print(code);
+                    setState(() {
+                      dialCode = code.dialCode;
+                      country = code.code;
+                    });
+                  }
+              },
+              child: Container(
+                padding: const EdgeInsets.all(10.0),
+                margin: const EdgeInsets.all(10),
+                decoration: const BoxDecoration(
+                    color: Colors.orange,
+                    borderRadius: BorderRadius.all(Radius.circular(5.0))
+                ),
+                child: Text(dialCode,
+                    style: const TextStyle(color: Colors.white)
+                ),
+              ),
+            ),
+            type: TextInputType.phone
           ),
 
           SizedBox(height: 20.0),

@@ -82,9 +82,7 @@ class RestaurantVM with ChangeNotifier {
             imageUrl: element['singleCardContent']['cardPhoto']['sizes']
                 ['urlTemplate'],
             rating: element['singleCardContent']['bubbleRating']['rating'],
-            totalReviews: 2,
-            //int.parse(element['singleCardContent']['bubbleRating']
-            //['numberReviews']['string']),
+            totalReviews: int.parse(element['singleCardContent']['bubbleRating']['numberReviews']['string']),
           ));
         });
         _restaurants.insertAll(0, tempRestaurants);
