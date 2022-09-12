@@ -11,7 +11,9 @@ class _BestFoodWidgetState extends State<BestFoodWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 350,
+      height: MediaQuery.of(context).size.height -
+          MediaQuery.of(context).padding.top -
+          300,
       width: double.infinity,
       child: Column(
         children: <Widget>[
