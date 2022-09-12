@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/providers/menu.dart';
+import 'package:flutter_app/providers/models/menu_list.dart';
+import 'package:flutter_app/providers/view%20models/cart.dart';
 import 'package:flutter_app/widgets/loading.widget.dart';
 import 'package:provider/provider.dart';
+import '../providers/view models/menu_list.dart';
 
 class MenuListScreen extends StatefulWidget {
   MenuListScreen(this.id);
@@ -15,12 +17,14 @@ class _MenuListScreenState extends State<MenuListScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<MenuVM>(context, listen: false).getMenuList(widget.id['id']);
+    Provider.of<MenuListVM>(context, listen: false)
+        .fetchMenuList(widget.id['id']);
   }
 
   @override
   Widget build(BuildContext context) {
-    final menuList = Provider.of<MenuVM>(context, listen: true);
+    final menuList = Provider.of<MenuListVM>(context, listen: true);
+    final menu = menuList.getterMenuList;
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -32,7 +36,7 @@ class _MenuListScreenState extends State<MenuListScreen> {
         body: menuList.loadingMenuList
             ? Center(child: LoadingWidget())
             : menuList.menuList.length != 0
-                ? _buildMenuList(menuList.menuList)
+                ? _buildMenuList(menu)
                 : menuList.menuListError != ""
                     ? Center(
                         child: Column(
@@ -68,9 +72,9 @@ class _MenuListScreenState extends State<MenuListScreen> {
                       ));
   }
 
-  Widget _buildMenuList(List data) {
+  Widget _buildMenuList(List<MenuList> menu) {
     return ListView.builder(
-      itemCount: data.length,
+      itemCount: menu.length,
       itemBuilder: (BuildContext context, int index) {
         return Padding(
           padding: const EdgeInsets.all(5.0),
@@ -85,7 +89,7 @@ class _MenuListScreenState extends State<MenuListScreen> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     child: Image.network(
-                      data[index]['data']['sizes'][0]['url'],
+                      menu[index].imageUrl,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -98,7 +102,7 @@ class _MenuListScreenState extends State<MenuListScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          data[index]['data']['caption'].toString(),
+                          menu[index].dishName,
                           maxLines: 2,
                           style: TextStyle(
                               fontSize: 20.0,
@@ -146,7 +150,9 @@ class _MenuListScreenState extends State<MenuListScreen> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 child: RaisedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    //Provider.of<CartVM>(context,listen: false).addCartItem();
+                                  },
                                   child: Text('Add To Cart'),
                                   color: Colors.purple,
                                   textColor: Colors.white,

@@ -17,6 +17,8 @@ class Menu {
 }
 
 class MenuVM extends ChangeNotifier {
+  List<Menu> get menu => menuIcons;
+
   List<Menu> menuIcons = [
     Menu(
         id: "001",
@@ -67,37 +69,4 @@ class MenuVM extends ChangeNotifier {
         slug: "",
         description: ""),
   ];
-
-  bool loadingMenuList = false;
-  String menuListError = "";
-  var menuList = [];
-  List<Menu> get menu => menuIcons;
-
-
-  getMenuList(String id) async {
-    print('loading....');
-    loadingMenuList = true;
-    try {
-      var data = await MenuApi.getMenus(id);
-      if (data[2] >= 200 || data[2] <= 299) {
-        menuList.clear();
-        menuList = data[0]['data']['AppPresentation_queryAppDetailV2'][0]
-            ['sections'][0]['albumPhotos'];
-        print('success: $menuList');
-      } else {
-        menuListError = data[1];
-      }
-    } on Exception catch (e) {
-      debugPrint('[ON EXCEPTION CATCH]\n$e');
-      menuListError = e.toString();
-    } on Error catch (e) {
-      debugPrint('[ON ERROR CATCH]\n$e');
-      menuListError = e.toString();
-    } finally {
-      loadingMenuList = false;
-      print('fianlly...');
-    }
-
-    notifyListeners();
-  }
 }

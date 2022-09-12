@@ -69,7 +69,7 @@ class RestaurantCard extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
                                   overflow: TextOverflow.ellipsis,
-                                  color: Colors.purple,
+                                  color: Color.fromARGB(255, 213, 30, 245),
                                 ),
                               ),
                               Text(

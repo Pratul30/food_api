@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/FoodOrderScreen.dart';
 import 'package:flutter_app/screens/HomeScreen.dart';
 import 'package:flutter_app/screens/Restaurant_list.dart';
 import 'package:flutter_app/screens/userScreen.dart';
@@ -33,7 +34,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           : _selectedIndex == 1
               ? const RestaurantListScreen()
               : _selectedIndex == 2
-                  ? const Center()
+                  ? FoodOrderScreen()
                   : const UserScreen(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

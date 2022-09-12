@@ -45,7 +45,7 @@ class BestFoodTitle extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Top Nearby restaurants',
+            'Top Restaurants Nearby',
             style: TextStyle(fontSize: 20),
           ),
           TextButton(

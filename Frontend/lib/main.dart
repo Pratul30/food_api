@@ -8,7 +8,7 @@ import 'package:flutter_app/screens/auth/SignupScreen.dart';
 import 'package:flutter_app/screens/menu_list.dart';
 import 'package:flutter_app/widgets/BottomNavBarWidget.dart';
 import 'package:provider/provider.dart';
-
+import './providers/view models/menu_list.dart';
 
 import './providers/view models/restaurant.dart';
 
@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(create: ((context) => MenuVM())),
         ChangeNotifierProvider(create: ((context) => AuthVM())),
+        ChangeNotifierProvider(create: ((context) => MenuListVM())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
