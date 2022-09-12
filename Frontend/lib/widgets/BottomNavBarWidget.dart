@@ -24,7 +24,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
     await resObj.loadAllRestaurants();
   }
 
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
