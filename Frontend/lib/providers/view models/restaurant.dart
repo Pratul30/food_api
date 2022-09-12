@@ -57,7 +57,6 @@ class RestaurantVM with ChangeNotifier {
         'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com',
       });
       final res = json.decode(response.body);
-      print(res);
       List temp = res['data'];
       temp.forEach((element) {
         if (element['ranking_geo_id'] != null) {

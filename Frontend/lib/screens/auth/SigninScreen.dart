@@ -141,7 +141,6 @@ class _SigninScreenState extends State<SigninScreen> {
                         overColor:Colors.white,
                         onPressed: () async {
                           await submit(context);
-                          print(authState.status);
                           if(authState.error != ""){
                             WidgetsUi().toast(
                               context: context,

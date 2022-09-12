@@ -4,7 +4,6 @@ import 'package:flutter_app/providers/view%20models/restaurant.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_app/widgets/BestFoodWidget.dart';
-import 'package:flutter_app/widgets/BottomNavBarWidget.dart';
 import 'package:flutter_app/widgets/SearchWidget.dart';
 import 'package:flutter_app/widgets/TopMenus.dart';
 
@@ -55,23 +54,22 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: appBar,
       body: res.loadingRestaurantList
-          ? Center(
-              child: LoadingWidget(),
-            )
-          : SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  SearchWidget(),
-                  TopMenus(),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  //PopularFoodsWidget(),
-                  BestFoodWidget(),
-                ],
+      ? Center(
+          child: LoadingWidget(),
+        )
+      : SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              SearchWidget(),
+              TopMenus(),
+              SizedBox(
+                height: 10,
               ),
-            ),
-      bottomNavigationBar: BottomNavBarWidget(),
+              //PopularFoodsWidget(),
+              BestFoodWidget(),
+            ],
+          ),
+        ),
     );
   }
 }
