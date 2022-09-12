@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class RestaurantCard extends StatelessWidget {
   RestaurantCard(this.id, this.name, this.info, this.imageUrl, this.rating,
       this.totalreviews);
@@ -67,9 +66,11 @@ class RestaurantCard extends StatelessWidget {
                               Text(
                                 name.substring(3),
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    overflow: TextOverflow.ellipsis),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  overflow: TextOverflow.ellipsis,
+                                  color: Colors.purple,
+                                ),
                               ),
                               Text(
                                 cuisines,

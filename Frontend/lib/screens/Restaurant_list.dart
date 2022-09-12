@@ -17,8 +17,13 @@ class RestaurantListScreen extends StatelessWidget {
     final args =
         ModalRoute.of(context).settings.arguments as Map<String, Object>;
 
-    final String cuisine = args.isEmpty ? '' : args['cuisine'];
-    final List<Restaurant> filterList = args.isEmpty ? [] : args['list'];
+    final String cuisine = args == null
+        ? 'All'
+        : args['cuisine'] == ''
+            ? 'All'
+            : args['cuisine'];
+    final List<Restaurant> filterList =
+        args == null ? restaurants : args['list'];
 
     return Scaffold(
       appBar: AppBar(

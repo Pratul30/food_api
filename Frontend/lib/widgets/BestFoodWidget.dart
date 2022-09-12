@@ -134,8 +134,8 @@ class BestFoodTiles extends StatelessWidget {
                           name.substring(3),
                           maxLines: 1,
                           style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.orange,
+                              fontSize: 20,
+                              color: Color.fromARGB(255, 213, 30, 245),
                               fontFamily: 'Times New Roman',
                               fontWeight: FontWeight.bold,
                               overflow: TextOverflow.ellipsis),

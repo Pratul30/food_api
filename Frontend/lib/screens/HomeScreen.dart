@@ -16,18 +16,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getUserGeoId();
-  }
-
-  void getUserGeoId() async {
-    var resObj = Provider.of<RestaurantVM>(context, listen: false);
-    await resObj.loadAllRestaurants();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final res = Provider.of<RestaurantVM>(context);
     final appBar = AppBar(
@@ -46,30 +34,30 @@ class _HomeScreenState extends State<HomeScreen> {
             Icons.notifications_none,
             color: Color(0xFF3a3737),
           ),
-          onPressed: () {
-          },
+          onPressed: () {},
         )
-      ], systemOverlayStyle: SystemUiOverlayStyle.dark,
+      ],
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
     );
     return Scaffold(
       appBar: appBar,
       body: res.loadingRestaurantList
-      ? Center(
-          child: LoadingWidget(),
-        )
-      : SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              SearchWidget(),
-              TopMenus(),
-              SizedBox(
-                height: 10,
+          ? Center(
+              child: LoadingWidget(),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  SearchWidget(),
+                  TopMenus(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  //PopularFoodsWidget(),
+                  BestFoodWidget(),
+                ],
               ),
-              //PopularFoodsWidget(),
-              BestFoodWidget(),
-            ],
-          ),
-        ),
+            ),
     );
   }
 }

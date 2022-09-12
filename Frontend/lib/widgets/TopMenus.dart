@@ -142,7 +142,7 @@ class TopMenuTiles extends StatelessWidget {
           ),
           Text(name,
               style: TextStyle(
-                  color: Color(0xFF6e6e71),
+                  //color: Colors.deepPurple,
                   fontSize: 14,
                   fontWeight: FontWeight.w400)),
         ],

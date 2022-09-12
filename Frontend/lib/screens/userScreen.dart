@@ -4,7 +4,7 @@ import 'package:flutter_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class UserScreen extends StatefulWidget {
-  const UserScreen({ Key key }) : super(key: key);
+  const UserScreen({Key key}) : super(key: key);
 
   @override
   State<UserScreen> createState() => _UserScreenState();
@@ -16,18 +16,16 @@ class _UserScreenState extends State<UserScreen> {
     final _user = Provider.of<AuthVM>(context);
     return Scaffold(
       appBar: AppBar(
-        centerTitle: false,
-        elevation: 0.0,
-        backgroundColor: Colors.orange,
-        title: Text(
-          "Profile",
-          style: TextStyle(
-            fontSize: 20.0,
-            color: Colors.black,
-            fontWeight: FontWeight.w800
-          ),
-        )
-      ),
+          centerTitle: false,
+          elevation: 0.0,
+          backgroundColor: Colors.orange,
+          title: Text(
+            "Profile",
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.w800,
+            ),
+          )),
       backgroundColor: Colors.grey[100],
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,18 +35,18 @@ class _UserScreenState extends State<UserScreen> {
           listTile(Icons.account_circle, "Last name", _user.user.firstName),
           listTile(Icons.email, "Email", _user.user.email),
           SizedBox(height: 10),
-          Divider(color: Colors.black,),
+          Divider(
+            color: Colors.black,
+          ),
           InkWell(
             onTap: () async {
               await _user.logout();
-              if(_user.error != ""){
+              if (_user.error != "") {
                 WidgetsUi().toast(
-                  context: context,
-                  message: _user.error,
-                  bColor: Colors.red
-                );
-              } else if(_user.status == 200){
-                Navigator.pushNamedAndRemoveUntil(context, 'signin', (route) => false);
+                    context: context, message: _user.error, bColor: Colors.red);
+              } else if (_user.status == 200) {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, 'signin', (route) => false);
               }
             },
             child: ListTile(
@@ -56,49 +54,43 @@ class _UserScreenState extends State<UserScreen> {
                 title: Text(
                   "Log out",
                   style: TextStyle(
-                    color: Colors.grey[600],
-                    fontWeight: FontWeight.bold
-                  ),
+                      color: Colors.grey[600], fontWeight: FontWeight.bold),
                 ),
                 trailing: _user.isLoading
-                  ? SizedBox(
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
-                        strokeWidth: 3.0,
-                      ),
-                      height: 20,
-                      width: 20,
-                    )
-                  : Icon(Icons.chevron_right, size: 30.0)
-              ),
+                    ? SizedBox(
+                        child: CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.orange),
+                          strokeWidth: 3.0,
+                        ),
+                        height: 20,
+                        width: 20,
+                      )
+                    : Icon(Icons.chevron_right, size: 30.0)),
           ),
         ],
       ),
     );
   }
 
-
-  Widget listTile(IconData icon, String subTitle, String title){
+  Widget listTile(IconData icon, String subTitle, String title) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       child: ListTile(
-              leading: Icon(icon, size: 30.0),
-              subtitle: Text(
-                subTitle,
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontWeight: FontWeight.w500
-                ),
-              ),
-              title: Text(
-                title,
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.grey[600],
-                  fontWeight: FontWeight.w600
-                ),
-              ),
-            ),
+        leading: Icon(icon, size: 30.0),
+        subtitle: Text(
+          subTitle,
+          style:
+              TextStyle(color: Colors.grey[600], fontWeight: FontWeight.w500),
+        ),
+        title: Text(
+          title,
+          style: TextStyle(
+              fontSize: 20.0,
+              color: Colors.grey[600],
+              fontWeight: FontWeight.w600),
+        ),
+      ),
     );
   }
 }

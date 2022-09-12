@@ -91,55 +91,74 @@ class _MenuListScreenState extends State<MenuListScreen> {
                   ),
                 ),
                 Expanded(
-                    flex: 4,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            data[index]['data']['caption'].toString(),
-                            maxLines: 2,
-                            style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                          SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Icon(Icons.star,
-                                  size: 30, color: Colors.amber[700]),
-                              SizedBox(width: 5),
-                              Text(
-                                "3.7 (1k+) - 40mins",
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            "Ullamco enim mollit exercitation enim diat amet.",
-                            style: TextStyle(
-                              color: Colors.grey[600],
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            "\$130",
-                            style: TextStyle(
+                  flex: 4,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          data[index]['data']['caption'].toString(),
+                          maxLines: 2,
+                          style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
-                            ),
+                              overflow: TextOverflow.ellipsis),
+                        ),
+                        SizedBox(height: 15),
+                        // Row(
+                        //   children: [
+                        //     Icon(Icons.star,
+                        //         size: 30, color: Colors.amber[700]),
+                        //     SizedBox(width: 5),
+                        //     Text(
+                        //       "3.7 (1k+) - 40mins",
+                        //       style: TextStyle(
+                        //         fontSize: 18.0,
+                        //         fontWeight: FontWeight.bold,
+                        //         overflow: TextOverflow.ellipsis,
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
+                        // SizedBox(height: 10),
+                        // Text(
+                        //   "Ullamco enim mollit exercitation enim diat amet.",
+                        //   style: TextStyle(
+                        //     color: Colors.grey[600],
+                        //     overflow: TextOverflow.ellipsis,
+                        //   ),
+                        // ),
+                        // SizedBox(height: 10),
+                        Text(
+                          "\$130",
+                          style: TextStyle(
+                            fontSize: 20.0,
                           ),
-                        ],
-                      ),
-                    ))
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: RaisedButton(
+                                  onPressed: () {},
+                                  child: Text('Add To Cart'),
+                                  color: Colors.purple,
+                                  textColor: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
           ),
