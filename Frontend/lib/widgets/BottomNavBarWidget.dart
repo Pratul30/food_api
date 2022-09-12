@@ -41,7 +41,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.near_me), label: 'Near By'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.card_giftcard), label: 'Cart'),
+              icon: Icon(Icons.shopping_cart), label: 'Cart'),
           BottomNavigationBarItem(
               icon: Icon(FontAwesomeIcons.user), label: 'Account'),
         ],
