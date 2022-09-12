@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/providers/location.dart';
-import 'package:provider/provider.dart';
 
-import '../providers/view models/geoId.dart';
 
 class RestaurantCard extends StatelessWidget {
   RestaurantCard(this.id, this.name, this.info, this.imageUrl, this.rating,

@@ -14,6 +14,7 @@ class AuthApi {
       },
       body: jsonEncode(data),
     );
+    AppHelper.setCookie(response);
     return AppHelper.response(response.body, response.statusCode);
   }
 
@@ -59,6 +60,19 @@ class AuthApi {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer token'
       },
+    );
+    return AppHelper.response(response.body, response.statusCode);
+  }
+
+
+  static Future<dynamic> logout() async {
+    var response = await http.post(
+      Uri.parse("${AppConstant.backendApi}/user/logout"),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Cookie': await AppHelper.getCookie()
+      },
+      body: jsonEncode({}),
     );
     return AppHelper.response(response.body, response.statusCode);
   }
