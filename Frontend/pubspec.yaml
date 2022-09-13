@@ -30,6 +30,8 @@ dependencies:
   provider: ^6.0.3
   geolocator: ^9.0.1
   http: ^0.13.5
+  flutter_launcher_icons: ^0.9.0
+  flutter_native_splash: ^2.0.2
 
 
 
@@ -37,6 +39,17 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/icon.png"
+
+flutter_native_splash:
+  android: true
+  ios: true
+  color: "#ffffff"
+  image: "assets/images/menus/ic_food_express.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -87,6 +100,7 @@ flutter:
     - assets/images/bestfood/ic_best_food_8.jpeg
     - assets/images/bestfood/ic_best_food_9.jpeg
     - assets/images/bestfood/ic_best_food_10.jpeg
+    - assets/images/icon.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
