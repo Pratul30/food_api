@@ -7,6 +7,7 @@ import 'package:flutter_app/screens/auth/SigninScreen.dart';
 import 'package:flutter_app/screens/auth/SignupScreen.dart';
 import 'package:flutter_app/screens/menu_list.dart';
 import 'package:flutter_app/widgets/BottomNavBarWidget.dart';
+import 'package:flutter_app/widgets/splashScreen.dart';
 import 'package:provider/provider.dart';
 import './providers/view models/menu_list.dart';
 
@@ -34,10 +35,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Roboto',
-          //hintColor: Color(0xFFd0cece),
           primaryColor: Colors.orange,
         ),
-        home: SigninScreen(),
+        home: SplashScreen(),
         routes: {
           'home': (context) => BottomNavBarWidget(),
           'Restaurant_list': (context) => RestaurantListScreen(),
