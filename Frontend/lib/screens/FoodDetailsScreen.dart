@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/animation/ScaleRoute.dart';
-import 'package:flutter_app/screens/FoodOrderScreen.dart';
+import 'package:flutter_app/screens/CartScreen.dart';
 
 class FoodDetailsScreen extends StatefulWidget {
   @override
@@ -32,7 +32,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                   color: Color(0xFF3a3737),
                 ),
                 onPressed: () {
-                  Navigator.push(context, ScaleRoute(page: FoodOrderScreen()));
+                  // Navigator.push(context, ScaleRoute(//page:// FoodOrderScreen()));
                 })
           ],
           systemOverlayStyle: SystemUiOverlayStyle.dark,
@@ -286,7 +286,7 @@ class AddToCartMenu extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(context, ScaleRoute(page: FoodOrderScreen()));
+              // Navigator.push(context, ScaleRoute(page: FoodOrderScreen()));
             },
             child: Container(
               width: 200.0,

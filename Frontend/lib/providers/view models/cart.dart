@@ -2,11 +2,35 @@ import 'package:flutter/material.dart';
 import '../models/cart.dart';
 
 class CartVM with ChangeNotifier {
-  List<Cart> _carts = [];
+  Map<String, Cart> _carts = {};
 
-  List<Cart> get getCart {
-    return [..._carts];
+  Map<String, Cart> get getCart {
+    return {..._carts};
   }
 
-  void addCartItem(String name, String imageUrl, int quantity, double price) {}
+  void addCartItem(String id, String name, String imageUrl, double price) {
+    if (_carts.containsKey(id)) {
+      _carts.update(
+          id,
+          (previous) => Cart(
+                id: previous.id,
+                imageUrl: previous.imageUrl,
+                name: previous.name,
+                price: previous.price,
+                quantity: previous.quantity + 1,
+              ));
+    } else {
+      _carts.putIfAbsent(
+        id,
+        () => Cart(
+          id: DateTime.now().toString(),
+          imageUrl: imageUrl,
+          name: name,
+          price: price,
+          quantity: 1,
+        ),
+      );
+    }
+    notifyListeners();
+  }
 }

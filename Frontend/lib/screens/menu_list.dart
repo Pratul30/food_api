@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/models/menu_list.dart';
 import 'package:flutter_app/providers/view%20models/cart.dart';
@@ -73,6 +75,7 @@ class _MenuListScreenState extends State<MenuListScreen> {
   }
 
   Widget _buildMenuList(List<MenuList> menu) {
+    final price = Random().nextDouble() * 100;
     return ListView.builder(
       itemCount: menu.length,
       itemBuilder: (BuildContext context, int index) {
@@ -135,7 +138,7 @@ class _MenuListScreenState extends State<MenuListScreen> {
                         // ),
                         // SizedBox(height: 10),
                         Text(
-                          "\$130",
+                          "\$ $price",
                           style: TextStyle(
                             fontSize: 20.0,
                           ),
@@ -151,7 +154,13 @@ class _MenuListScreenState extends State<MenuListScreen> {
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 child: RaisedButton(
                                   onPressed: () {
-                                    //Provider.of<CartVM>(context,listen: false).addCartItem();
+                                    Provider.of<CartVM>(context, listen: false)
+                                        .addCartItem(
+                                      menu[index].id,
+                                      menu[index].dishName,
+                                      menu[index].imageUrl,
+                                      price,
+                                    );
                                   },
                                   child: Text('Add To Cart'),
                                   color: Colors.purple,

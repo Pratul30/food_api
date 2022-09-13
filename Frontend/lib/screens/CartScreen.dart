@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../widgets/cart_list.dart';
 
-class FoodOrderScreen extends StatefulWidget {
+class CartScreen extends StatefulWidget {
   @override
-  _FoodOrderScreenState createState() => _FoodOrderScreenState();
+  _CartScreenState createState() => _CartScreenState();
 }
 
-class _FoodOrderScreenState extends State<FoodOrderScreen> {
+class _CartScreenState extends State<CartScreen> {
   int counter = 3;
 
   @override
