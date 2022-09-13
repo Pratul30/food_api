@@ -10,6 +10,7 @@ import 'package:flutter_app/widgets/BottomNavBarWidget.dart';
 import 'package:flutter_app/widgets/splashScreen.dart';
 import 'package:provider/provider.dart';
 import './providers/view models/menu_list.dart';
+import './providers/view models/cart.dart';
 
 import './providers/view models/restaurant.dart';
 
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: ((context) => MenuVM())),
         ChangeNotifierProvider(create: ((context) => AuthVM())),
         ChangeNotifierProvider(create: ((context) => MenuListVM())),
+        ChangeNotifierProvider(create: ((context) => CartVM())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
