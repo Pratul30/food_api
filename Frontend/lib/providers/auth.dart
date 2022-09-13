@@ -126,4 +126,24 @@ class AuthVM with ChangeNotifier {
   }
 
 
+  // refresh() async {
+  //   setState(true, "", 100);
+  //   try {
+  //     var resp = await AuthApi.refresh();
+  //     if (resp[2] >= 200 && resp[2] <= 299) {
+  //       setState(false, "", 200);
+  //       AppHelper.clearLocalStates();
+  //     } else {
+  //       setState(false, resp[1]['message'].toString(), resp[2]);
+  //     }
+  //   } on Exception catch (e) {
+  //     debugPrint('[ON EXCEPTION CATCH]\n$e');
+  //     setState(false, e.toString(), 500);
+  //   } on Error catch (e) {
+  //     debugPrint('[ON ERROR CATCH]\n$e');
+  //     setState(false, e.toString(), 500);
+  //   }
+  // }
+
+
 }

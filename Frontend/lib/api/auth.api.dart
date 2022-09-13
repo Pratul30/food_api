@@ -42,27 +42,16 @@ class AuthApi {
   }
 
 
-  static Future<dynamic> profil() async {
-    var response = await http.get(
-      Uri.parse("${AppConstant.backendApi}/profil"),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer token'
-      },
-    );
-    return AppHelper.response(response.body, response.statusCode);
-  }
-
-  static Future<dynamic> refresh() async {
-    var response = await http.get(
-      Uri.parse("${AppConstant.backendApi}/user/refresh"),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer token'
-      },
-    );
-    return AppHelper.response(response.body, response.statusCode);
-  }
+  // static Future<dynamic> refresh() async {
+  //   var response = await http.get(
+  //     Uri.parse("${AppConstant.backendApi}/user/refresh"),
+  //     headers: <String, String>{
+  //       'Content-Type': 'application/json',
+  //       'Cookie': await AppHelper.getCookie()
+  //     },
+  //   );
+  //   return AppHelper.response(response.body, response.statusCode);
+  // }
 
 
   static Future<dynamic> logout() async {
