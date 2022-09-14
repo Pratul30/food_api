@@ -75,10 +75,11 @@ class _MenuListScreenState extends State<MenuListScreen> {
   }
 
   Widget _buildMenuList(List<MenuList> menu) {
-    final price = Random().nextDouble() * 100;
     return ListView.builder(
       itemCount: menu.length,
       itemBuilder: (BuildContext context, int index) {
+        final price = Random().nextDouble() * 100;
+        final priceString = price.toStringAsFixed(2);
         return Padding(
           padding: const EdgeInsets.all(5.0),
           child: Container(
@@ -138,7 +139,7 @@ class _MenuListScreenState extends State<MenuListScreen> {
                         // ),
                         // SizedBox(height: 10),
                         Text(
-                          "\$ $price",
+                          "\$ $priceString",
                           style: TextStyle(
                             fontSize: 20.0,
                           ),
@@ -147,25 +148,33 @@ class _MenuListScreenState extends State<MenuListScreen> {
                           height: 10,
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: RaisedButton(
-                                  onPressed: () {
-                                    Provider.of<CartVM>(context, listen: false)
-                                        .addCartItem(
-                                      menu[index].id,
-                                      menu[index].dishName,
-                                      menu[index].imageUrl,
-                                      price,
-                                    );
-                                  },
-                                  child: Text('Add To Cart'),
-                                  color: Colors.purple,
-                                  textColor: Colors.white,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
+                                onPressed: () {
+                                  Provider.of<CartVM>(context, listen: false)
+                                      .addCartItem(
+                                    menu[index].id,
+                                    name: menu[index].dishName,
+                                    imageUrl: menu[index].imageUrl,
+                                    price: price,
+                                  );
+                                },
+                                child: Container(
+                                  width: 100,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'Add To Cart',
+                                  ),
+                                ),
+                                color: Colors.purple,
+                                textColor: Colors.white,
                               ),
                             ),
                           ],

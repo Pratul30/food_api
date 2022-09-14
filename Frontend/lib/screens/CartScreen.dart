@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/view models/cart.dart';
 import '../widgets/cart_list.dart';
 
 class CartScreen extends StatefulWidget {
@@ -11,33 +13,52 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var cart = Provider.of<CartVM>(context);
+    var cartMap = cart.getCart;
+    var appBar = AppBar(
+      backgroundColor: Colors.orange,
+      elevation: 0,
+      title: Text(
+        "Item Carts",
+        style: TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: 18,
+        ),
+        textAlign: TextAlign.center,
+      ),
+      brightness: Brightness.light,
+      actions: <Widget>[
+        CartIconWithBadge(),
+      ],
+    );
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.orange,
-        elevation: 0,
-        title: Text(
-          "Item Carts",
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 18,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        brightness: Brightness.light,
-        actions: <Widget>[
-          CartIconWithBadge(),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CartList(),
-            ],
-          ),
-        ),
-      ),
+      appBar: appBar,
+      body: cartMap == null
+          ? Center(
+              child: Text('No Items added. \nGood food is waiting for you.'),
+            )
+          : ListView(
+              children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: cartMap.length,
+                  itemBuilder: ((context, index) =>
+                      cartMap.values.toList()[index].quantity < 1
+                          ? null
+                          : CartList(
+                              cartMap.keys.toList()[index],
+                              cartMap.values.toList()[index],
+                            )),
+                ),
+
+                // // ignore: sdk_version_ui_as_code
+                // ...cartList
+                //     .map(
+                //       (e) => e.quantity < 1 ? null : CartList(e),
+                //     )
+                //     .toList(),
+              ],
+            ),
     );
   }
 }
