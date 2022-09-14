@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/helper.dart';
+import 'package:flutter_app/providers/auth.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({ Key key }) : super(key: key);
@@ -19,9 +22,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void refresh() async {
     final String token = await AppHelper.getToken();
-    print('token: $token');
-    if(token != null && token != "")
+    if(token != null && token != ""){
       Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+      bool  isExpired = JwtDecoder.isExpired(token);
+      print('isExpired: $isExpired');
+      if(!isExpired){
+        await Provider.of<AuthVM>(context, listen: false).refresh();
+      }
+    }
     else
       Navigator.pushNamedAndRemoveUntil(context, 'signin', (route) => false);
 

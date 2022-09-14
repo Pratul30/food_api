@@ -42,16 +42,17 @@ class AuthApi {
   }
 
 
-  // static Future<dynamic> refresh() async {
-  //   var response = await http.get(
-  //     Uri.parse("${AppConstant.backendApi}/user/refresh"),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json',
-  //       'Cookie': await AppHelper.getCookie()
-  //     },
-  //   );
-  //   return AppHelper.response(response.body, response.statusCode);
-  // }
+  static Future<dynamic> refresh() async {
+    var response = await http.get(
+      Uri.parse("${AppConstant.backendApi}/user/refresh"),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Cookie': await AppHelper.getCookie()
+      },
+    );
+    AppHelper.setCookie(response);
+    return AppHelper.response(response.body, response.statusCode);
+  }
 
 
   static Future<dynamic> logout() async {

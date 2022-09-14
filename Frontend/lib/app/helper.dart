@@ -74,6 +74,8 @@ class AppHelper {
       }).catchError((err){
           print('error to set cookie: $err');
       });
+    } else {
+      print('rawCookie is null');
     }
   }
 
