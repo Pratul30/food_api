@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/api/auth.api.dart';
 import 'package:flutter_app/app/helper.dart';
 import 'package:flutter_app/providers/models/user.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 
 
@@ -32,6 +33,21 @@ class AuthVM with ChangeNotifier {
     notifyListeners();
   }
 
+  getUser(dynamic data, String token){
+    UserModel user = UserModel(
+      firstName: data['first_name'],
+      lastName: data['last_name'],
+      email: data['email'],
+      country: data['country'],
+      cusId: data['cus_id'],
+      ewalletId: data['ewallet_id'],
+      businessVatId: data['business_vat_id'],
+      token: token
+    );
+    AppHelper.setToken(token);
+    setUserModel(user);
+  }
+
   signin(dynamic data) async {
     setState(true, "", 100);
     /// clear all local storages
@@ -40,19 +56,7 @@ class AuthVM with ChangeNotifier {
       var resp = await AuthApi.signin(data);
       if (resp[2] >= 200 && resp[2] <= 299) {
         setState(false, "", 200);
-        final value = resp[0]['data']['user'];
-        UserModel user = UserModel(
-          firstName: value['first_name'],
-          lastName: value['last_name'],
-          email: value['email'],
-          country: value['country'],
-          cusId: value['cus_id'],
-          ewalletId: value['ewallet_id'],
-          businessVatId: value['business_vat_id'],
-          token: resp[0]['data']['accessToken']
-        );
-        AppHelper.setToken(user.token);
-        setUserModel(user);
+        getUser(resp[0]['data']['user'], resp[0]['data']['accessToken']);
       } else {
         setState(false, resp[1]['message'].toString(), resp[2]);
       }
@@ -132,7 +136,8 @@ class AuthVM with ChangeNotifier {
       var resp = await AuthApi.refresh();
       if (resp[2] >= 200 && resp[2] <= 299) {
         setState(false, "", 200);
-        AppHelper.setToken(resp[0]['accessToken']);
+        var user = await JwtDecoder.decode(resp[0]['accessToken']);
+        getUser(user['userData'], resp[0]['accessToken']);
       } else {
         setState(false, resp[1]['message'].toString(), resp[2]);
       }

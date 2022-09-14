@@ -1,4 +1,3 @@
-
 class AppConstant {
   /// travel-advisor restaurant details
   static const travelRestoApi =

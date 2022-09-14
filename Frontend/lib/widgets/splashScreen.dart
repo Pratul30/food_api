@@ -25,10 +25,12 @@ class _SplashScreenState extends State<SplashScreen> {
     if(token != null && token != ""){
       Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       bool  isExpired = JwtDecoder.isExpired(token);
+      var user = JwtDecoder.decode(token);
       print('isExpired: $isExpired');
       if(!isExpired){
         await Provider.of<AuthVM>(context, listen: false).refresh();
-      }
+      } else
+        await Provider.of<AuthVM>(context, listen: false).getUser(user['userData'], token);
     }
     else
       Navigator.pushNamedAndRemoveUntil(context, 'signin', (route) => false);

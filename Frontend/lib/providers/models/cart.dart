@@ -1,12 +1,12 @@
 class Cart {
-  String id;
+  String cartId;
   String name;
   String imageUrl;
   int quantity;
   double price;
 
   Cart({
-    this.id,
+    this.cartId,
     this.name,
     this.imageUrl,
     this.quantity,

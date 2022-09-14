@@ -5,15 +5,15 @@ class CartVM with ChangeNotifier {
   Map<String, Cart> _carts = {};
 
   Map<String, Cart> get getCart {
-    return {..._carts};
+    return _carts;
   }
 
-  void addCartItem(String id, String name, String imageUrl, double price) {
+  void addCartItem(String id, {String name, String imageUrl, double price}) {
     if (_carts.containsKey(id)) {
       _carts.update(
           id,
           (previous) => Cart(
-                id: previous.id,
+                cartId: previous.cartId,
                 imageUrl: previous.imageUrl,
                 name: previous.name,
                 price: previous.price,
@@ -23,7 +23,7 @@ class CartVM with ChangeNotifier {
       _carts.putIfAbsent(
         id,
         () => Cart(
-          id: DateTime.now().toString(),
+          cartId: DateTime.now().toString(),
           imageUrl: imageUrl,
           name: name,
           price: price,
@@ -31,6 +31,26 @@ class CartVM with ChangeNotifier {
         ),
       );
     }
+    notifyListeners();
+  }
+
+  void subtractCartItem(String id) {
+    if (_carts.containsKey(id)) {
+      _carts.update(
+          id,
+          (previous) => Cart(
+                cartId: previous.cartId,
+                imageUrl: previous.imageUrl,
+                name: previous.name,
+                price: previous.price,
+                quantity: previous.quantity - 1,
+              ));
+    }
+    notifyListeners();
+  }
+
+  void removeCartItem(String id) {
+    _carts.remove(id);
     notifyListeners();
   }
 }
