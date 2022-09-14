@@ -18,80 +18,74 @@ class _CartListState extends State<CartList> {
   Widget build(BuildContext context) {
     final cartListener = Provider.of<CartVM>(context);
     return Container(
-      margin: EdgeInsets.all(10),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Row(
-            children: [
-              Container(
-                height: 75,
-                width: 75,
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
+      margin: EdgeInsets.only(bottom: 10),
+      child: Row(
+        children: [
+          Container(
+            height: 75,
+            width: 75,
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: Image.network(
+              widget.cart.imageUrl,
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          Expanded(
+            child: Column(
+              //mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  widget.cart.name,
+                  style: TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
                 ),
-                clipBehavior: Clip.antiAlias,
-                child: Image.network(
-                  widget.cart.imageUrl,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Expanded(
-                child: Column(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   //mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      widget.cart.name,
-                      style: TextStyle(
-                          overflow: TextOverflow.ellipsis,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                        'Total: \$ ${(widget.cart.price * widget.cart.quantity).toStringAsFixed(2)}'),
+                    SizedBox(
+                      width: 5,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      //mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            widget.cart.quantity > 1
-                                ? cartListener.subtractCartItem(widget.cartKey)
-                                : cartListener.removeCartItem(widget.cartKey);
-                          },
-                          icon: Icon(
-                            Icons.indeterminate_check_box,
-                            color: Colors.purple,
-                          ),
-                        ),
-                        Text(
-                          '${widget.cart.quantity}',
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            cartListener.addCartItem(widget.cartKey);
-                          },
-                          icon: Icon(
-                            Icons.add_box,
-                            color: Colors.purple,
-                          ),
-                        ),
-                      ],
+                    IconButton(
+                      onPressed: () {
+                        widget.cart.quantity > 1
+                            ? cartListener.subtractCartItem(widget.cartKey)
+                            : cartListener.removeCartItem(widget.cartKey);
+                      },
+                      icon: Icon(
+                        Icons.indeterminate_check_box,
+                        color: Colors.purple,
+                      ),
                     ),
                     Text(
-                        'Amount: \$ ${(widget.cart.price * widget.cart.quantity).toStringAsFixed(2)}')
+                      '${widget.cart.quantity}',
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        cartListener.addCartItem(widget.cartKey);
+                      },
+                      icon: Icon(
+                        Icons.add_box,
+                        color: Colors.purple,
+                      ),
+                    ),
                   ],
                 ),
-              )
-            ],
-          ),
-        ),
-        elevation: 3,
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

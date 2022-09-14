@@ -13,6 +13,7 @@ import './providers/view models/menu_list.dart';
 import './providers/view models/cart.dart';
 
 import './providers/view models/restaurant.dart';
+import './screens/CartScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
           'signin': (context) => SigninScreen(),
           'signup': (context) => SignupScreen(),
           'forgot_pwd': (context) => ForgotPasswordScreen(),
+          'cart_screen': (context) => CartScreen(),
         },
         onGenerateRoute: (settings) {
           if (settings.name == '/menu') {

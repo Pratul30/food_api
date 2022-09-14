@@ -7,6 +7,8 @@ import 'package:flutter_app/widgets/loading.widget.dart';
 import 'package:provider/provider.dart';
 import '../providers/view models/menu_list.dart';
 
+import '../widgets/cart_badge.dart';
+
 class MenuListScreen extends StatefulWidget {
   MenuListScreen(this.id);
   final id;
@@ -31,8 +33,17 @@ class _MenuListScreenState extends State<MenuListScreen> {
         appBar: AppBar(
           elevation: 0.0,
           backgroundColor: Colors.orange,
-          title: Text("Menu list"),
+          title: Text(
+            "Menu list",
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
+            ),
+          ),
           centerTitle: false,
+          actions: [
+            CartIconWithBadge(),
+          ],
         ),
         //backgroundColor: Color.fromARGB(255, 252, 241, 241),
         body: menuList.loadingMenuList

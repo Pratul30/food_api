@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../widgets/RestaurantCard.dart';
 
 import '../providers/models/restaurant.dart';
+import '../widgets/cart_badge.dart';
 
 class RestaurantListScreen extends StatelessWidget {
   const RestaurantListScreen({Key key}) : super(key: key);
@@ -29,9 +30,15 @@ class RestaurantListScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Nearby $cuisine Restaurants',
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 20,
+          ),
         ),
-        brightness: Brightness.light,
         backgroundColor: Colors.orange,
+        actions: <Widget>[
+          CartIconWithBadge(),
+        ],
       ),
       body: ListView.builder(
         itemBuilder: ((context, index) => RestaurantCard(
