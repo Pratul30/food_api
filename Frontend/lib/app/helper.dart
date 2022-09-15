@@ -70,4 +70,5 @@ class AppHelper {
       print('rawCookie is null');
     }
   }
+
 }

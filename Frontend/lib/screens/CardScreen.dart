@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/view%20models/cart.vm.dart';
 import 'package:flutter_app/providers/view%20models/payment.vm.dart';
 import 'package:flutter_app/widgets/widgets.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
@@ -6,7 +7,8 @@ import 'package:provider/provider.dart';
 
 
 class CardScreen extends StatefulWidget {
-  const CardScreen({Key key}) : super(key: key);
+  String amountToPay;
+  CardScreen({Key key, @required this.amountToPay}) : super(key: key);
 
   @override
   State<CardScreen> createState() => _CardScreenState();
@@ -40,6 +42,7 @@ class _CardScreenState extends State<CardScreen> {
   @override
   Widget build(BuildContext context) {
     final _payment = Provider.of<PaymentVM>(context);
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -127,7 +130,20 @@ class _CardScreenState extends State<CardScreen> {
                         overColor:Colors.white,
                         onPressed: () async {
                           if(isFilled() && !_payment.isLoading){
-                            var data = {};
+                            var data = {
+                              "amount": widget.amountToPay,
+                              "currency": "",
+                              "payment_method": {
+                                "type": "",
+                                "fields": {
+                                  "number": cardNumber,
+                                  "expiration_month": expiryDate.substring(0,2),
+                                  "expiration_year": expiryDate.substring(3,5),
+                                  "name": cardHolderName,
+                                  "cvv": cvvCode
+                                }
+                              }
+                            };
                             await _payment.paymentCard(data);
                           }
                           if(_payment.error != ""){
@@ -138,13 +154,18 @@ class _CardScreenState extends State<CardScreen> {
                             );
                           } 
                           else if(_payment.status == 200){
-                            // remove items in cart 
-                            // go back to the last page
                             WidgetsUi().toast(
                               context: context,
                               message: "success",
                               bColor: Colors.greenAccent
                             );
+
+                            Future.delayed(Duration(seconds: 2), (){
+                              /// remove items in cart 
+                              Provider.of<CartVM>(context, listen: false).removeAllItems();
+                              /// go back to the [Home] page
+                              Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+                            });
                           }
                         }
                   ),

@@ -134,6 +134,7 @@ class AuthVM with ChangeNotifier {
     setState(true, "", 100);
     try {
       var resp = await AuthApi.refresh();
+    print(resp);
       if (resp[2] >= 200 && resp[2] <= 299) {
         setState(false, "", 200);
         var user = await JwtDecoder.decode(resp[0]['accessToken']);

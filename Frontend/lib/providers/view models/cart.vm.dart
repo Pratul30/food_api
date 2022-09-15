@@ -18,6 +18,15 @@ class CartVM with ChangeNotifier {
     return totalAmount;
   }
 
+
+  removeAllItems(){
+    _carts = {};
+    totalAmount = 0;
+    totalQuantity = 0;
+
+    notifyListeners();
+  }
+
   void addCartItem(String id, {String name, String imageUrl, double price}) {
     if (_carts.containsKey(id)) {
       _carts.update(id, (previous) {

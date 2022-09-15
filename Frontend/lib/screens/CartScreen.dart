@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 import '../providers/view models/cart.vm.dart';
 import '../screens/CardScreen.dart';
@@ -157,39 +158,31 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => CardScreen(),
-                    ));
-                  },
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                    height: 50,
-                    child: Card(
-                      color: Colors.orange,
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Pay \$ ${cart.getTotalAmount.toStringAsFixed(2)}',
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: WidgetsUi().button(
+                    child: Text(
+                      'Pay \$ ${cart.getTotalAmount.toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                        color: Colors.white
                       ),
                     ),
+                    width: double.infinity,
+                    shape: 10.0,
+                    outlineColor: Colors.transparent,
+                    color: Colors.orange,
+                    overColor:Colors.white,
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => CardScreen(
+                          amountToPay: cart.getTotalAmount.toStringAsFixed(2),
+                        ),
+                      ));
+                    }
                   ),
                 )
-                // // ignore: sdk_version_ui_as_code
-                // ...cartList
-                //     .map(
-                //       (e) => e.quantity < 1 ? null : CartList(e),
-                //     )
-                //     .toList(),
               ],
             ),
     );
