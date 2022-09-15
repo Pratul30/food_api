@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/models/menu_list.dart';
-import 'package:flutter_app/providers/view%20models/cart.dart';
+import 'package:flutter_app/providers/view%20models/cart.vm.dart';
 import 'package:flutter_app/widgets/loading.widget.dart';
 import 'package:provider/provider.dart';
-import '../providers/view models/menu_list.dart';
+import '../providers/view models/menu_list.vm.dart';
 
 import '../widgets/cart_badge.dart';
 

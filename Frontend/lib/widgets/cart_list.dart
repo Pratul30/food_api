@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../providers/models/cart.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/view models/cart.dart';
+import '../providers/view models/cart.vm.dart';
 
 class CartList extends StatefulWidget {
   final Cart cart;

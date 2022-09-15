@@ -5,7 +5,7 @@ import 'package:flutter_app/screens/Restaurant_list.dart';
 import 'package:flutter_app/screens/userScreen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import '../providers/view models/restaurant.dart';
+import '../providers/view models/restaurant.vm.dart';
 
 class BottomNavBarWidget extends StatefulWidget {
   @override

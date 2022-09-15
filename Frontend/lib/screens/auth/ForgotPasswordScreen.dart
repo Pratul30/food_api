@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/providers/auth.dart';
+import 'package:flutter_app/providers/view%20models/auth.vm.dart';
 import 'package:flutter_app/widgets/loading.widget.dart';
 import 'package:flutter_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';

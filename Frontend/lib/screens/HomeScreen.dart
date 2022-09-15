@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/providers/view%20models/restaurant.dart';
+import 'package:flutter_app/providers/view%20models/restaurant.vm.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_app/widgets/BestFoodWidget.dart';

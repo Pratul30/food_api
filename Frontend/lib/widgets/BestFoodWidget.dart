@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/providers/view%20models/restaurant.dart';
+import 'package:flutter_app/providers/view%20models/restaurant.vm.dart';
 import 'package:provider/provider.dart';
 
 class BestFoodWidget extends StatefulWidget {

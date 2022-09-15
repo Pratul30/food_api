@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/providers/auth.dart';
+import 'package:flutter_app/providers/view%20models/auth.vm.dart';
 import 'package:flutter_app/providers/menu.dart';
+import 'package:flutter_app/providers/view%20models/payment.vm.dart';
 import 'package:flutter_app/screens/Restaurant_list.dart';
 import 'package:flutter_app/screens/auth/ForgotPasswordScreen.dart';
 import 'package:flutter_app/screens/auth/SigninScreen.dart';
@@ -9,10 +10,10 @@ import 'package:flutter_app/screens/menu_list.dart';
 import 'package:flutter_app/widgets/BottomNavBarWidget.dart';
 import 'package:flutter_app/widgets/splashScreen.dart';
 import 'package:provider/provider.dart';
-import './providers/view models/menu_list.dart';
-import './providers/view models/cart.dart';
+import 'providers/view models/menu_list.vm.dart';
+import 'providers/view models/cart.vm.dart';
 
-import './providers/view models/restaurant.dart';
+import 'providers/view models/restaurant.vm.dart';
 import './screens/CartScreen.dart';
 
 void main() {
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: ((context) => AuthVM())),
         ChangeNotifierProvider(create: ((context) => MenuListVM())),
         ChangeNotifierProvider(create: ((context) => CartVM())),
+        ChangeNotifierProvider(create: ((context) => PaymentVM())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,6 +1,6 @@
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/providers/auth.dart';
+import 'package:flutter_app/providers/view%20models/auth.vm.dart';
 import 'package:flutter_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 

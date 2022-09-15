@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../providers/view models/cart.dart';
+import '../providers/view models/cart.vm.dart';
 import '../screens/CardScreen.dart';
 import '../widgets/cart_list.dart';
 import '../widgets/cart_badge.dart';
@@ -28,10 +29,9 @@ class _CartScreenState extends State<CartScreen> {
         ),
         textAlign: TextAlign.center,
       ),
-      brightness: Brightness.light,
       actions: <Widget>[
         CartIconWithBadge(),
-      ],
+      ], systemOverlayStyle: SystemUiOverlayStyle.dark,
     );
     return Scaffold(
       appBar: appBar,

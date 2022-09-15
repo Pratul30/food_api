@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/view models/restaurant.dart';
+import '../providers/view models/restaurant.vm.dart';
 import '../providers/models/restaurant.dart';
 
 class SearchWidget extends StatelessWidget {

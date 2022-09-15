@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/helper.dart';
-import 'package:flutter_app/providers/auth.dart';
+import 'package:flutter_app/providers/view%20models/auth.vm.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
 

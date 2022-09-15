@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/menu.dart';
-import 'package:flutter_app/providers/view%20models/restaurant.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_app/providers/view%20models/restaurant.vm.dart';
 import 'package:provider/provider.dart';
 import '../providers/models/restaurant.dart';
 

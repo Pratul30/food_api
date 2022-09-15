@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_app/api/menu.api.dart';
 
 class Menu {
   String id;
