@@ -12,7 +12,6 @@ class PaymentApi {
       headers: <String, String>{
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${await AppHelper.getToken()}'
-
       },
       body: jsonEncode(data),
     );

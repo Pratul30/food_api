@@ -267,7 +267,7 @@ class _SignupScreenState extends State<SignupScreen> {
   Future<void> navigateAndPickCountry(BuildContext context) async {
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CountriesScreen()),
+      MaterialPageRoute(builder: (context) => CountriesScreen(value: 'phone')),
     );
 
     // When a BuildContext is used from a StatefulWidget, the mounted property
