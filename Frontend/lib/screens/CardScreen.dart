@@ -5,7 +5,6 @@ import 'package:flutter_app/widgets/widgets.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:provider/provider.dart';
 
-
 class CardScreen extends StatefulWidget {
   String amountToPay;
   CardScreen({Key key, @required this.amountToPay}) : super(key: key);
@@ -33,9 +32,11 @@ class _CardScreenState extends State<CardScreen> {
     isFilled();
   }
 
-  bool isFilled(){
-    if(cardNumber != '' && expiryDate != '' && cardHolderName != '' && cvvCode != '')
-      return true;
+  bool isFilled() {
+    if (cardNumber != '' &&
+        expiryDate != '' &&
+        cardHolderName != '' &&
+        cvvCode != '') return true;
     return false;
   }
 
@@ -55,9 +56,10 @@ class _CardScreenState extends State<CardScreen> {
         ),
         backgroundColor: Colors.orange,
       ),
-      body: Container(
-        child: SafeArea(
-          child: Column(
+      body: SingleChildScrollView(
+        child: Container(
+          child: SafeArea(
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
@@ -102,77 +104,74 @@ class _CardScreenState extends State<CardScreen> {
                 themeColor: Colors.black,
                 formKey: formKey,
               ),
-              SizedBox(height:10.0),
-
+              SizedBox(height: 10.0),
               Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: WidgetsUi().button(
+                padding: const EdgeInsets.all(10),
+                child: WidgetsUi().button(
                     child: _payment.isLoading
-                      ? SizedBox(
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                            strokeWidth: 3.0,
+                        ? SizedBox(
+                            child: CircularProgressIndicator(
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(Colors.white),
+                              strokeWidth: 3.0,
+                            ),
+                            height: 30,
+                            width: 30,
+                          )
+                        : Text(
+                            "Pay",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                                color: Colors.white),
                           ),
-                          height: 30,
-                          width: 30,
-                        )
-                      :  Text(
-                          "Pay",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                            color: Colors.white
-                          ),
-                        ),
-                        width: double.infinity,
-                        outlineColor: Colors.transparent,
-                        color: isFilled() ? Colors.orange : Colors.grey[500],
-                        overColor:Colors.white,
-                        onPressed: () async {
-                          if(isFilled() && !_payment.isLoading){
-                            var data = {
-                              "amount": widget.amountToPay,
-                              "currency": "",
-                              "payment_method": {
-                                "type": "",
-                                "fields": {
-                                  "number": cardNumber,
-                                  "expiration_month": expiryDate.substring(0,2),
-                                  "expiration_year": expiryDate.substring(3,5),
-                                  "name": cardHolderName,
-                                  "cvv": cvvCode
-                                }
-                              }
-                            };
-                            await _payment.paymentCard(data);
+                    width: double.infinity,
+                    outlineColor: Colors.transparent,
+                    color: isFilled() ? Colors.orange : Colors.grey[500],
+                    overColor: Colors.white,
+                    onPressed: () async {
+                      if (isFilled() && !_payment.isLoading) {
+                        var data = {
+                          "amount": widget.amountToPay,
+                          "currency": "",
+                          "payment_method": {
+                            "type": "",
+                            "fields": {
+                              "number": cardNumber,
+                              "expiration_month": expiryDate.substring(0, 2),
+                              "expiration_year": expiryDate.substring(3, 5),
+                              "name": cardHolderName,
+                              "cvv": cvvCode
+                            }
                           }
-                          if(_payment.error != ""){
-                            WidgetsUi().toast(
-                              context: context,
-                              message: _payment.error,
-                              bColor: Colors.red
-                            );
-                          } 
-                          else if(_payment.status == 200){
-                            WidgetsUi().toast(
-                              context: context,
-                              message: "success",
-                              bColor: Colors.greenAccent
-                            );
+                        };
+                        await _payment.paymentCard(data);
+                      }
+                      if (_payment.error != "") {
+                        WidgetsUi().toast(
+                            context: context,
+                            message: _payment.error,
+                            bColor: Colors.red);
+                      } else if (_payment.status == 200) {
+                        WidgetsUi().toast(
+                            context: context,
+                            message: "success",
+                            bColor: Colors.greenAccent);
 
-                            Future.delayed(Duration(seconds: 2), (){
-                              /// remove items in cart 
-                              Provider.of<CartVM>(context, listen: false).removeAllItems();
-                              /// go back to the [Home] page
-                              Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
-                            });
-                          }
-                        }
-                  ),
-                ),
+                        Future.delayed(Duration(seconds: 2), () {
+                          /// remove items in cart
+                          Provider.of<CartVM>(context, listen: false)
+                              .removeAllItems();
 
+                          /// go back to the [Home] page
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, 'home', (route) => false);
+                        });
+                      }
+                    }),
+              ),
             ],
-          )
+          )),
         ),
       ),
     );
