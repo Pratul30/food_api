@@ -130,11 +130,10 @@ class AuthVM with ChangeNotifier {
   }
 
 
-  refresh() async {
+  refresh(BuildContext context) async {
     setState(true, "", 100);
     try {
       var resp = await AuthApi.refresh();
-    print(resp);
       if (resp[2] >= 200 && resp[2] <= 299) {
         setState(false, "", 200);
         var user = await JwtDecoder.decode(resp[0]['accessToken']);
@@ -148,6 +147,10 @@ class AuthVM with ChangeNotifier {
     } on Error catch (e) {
       debugPrint('[ON ERROR CATCH]\n$e');
       setState(false, e.toString(), 500);
+    } finally {
+      if(error != ""){
+        Navigator.pushNamedAndRemoveUntil(context, 'signin', (route) => false);
+      }
     }
   }
 

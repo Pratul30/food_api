@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_app/providers/view%20models/auth.vm.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppHelper {
@@ -71,4 +75,11 @@ class AppHelper {
     }
   }
 
+
+  static Future<bool> refreshToken(BuildContext context) async {
+    bool  isExpired = JwtDecoder.isExpired(await AppHelper.getToken());
+    if(isExpired){
+      await Provider.of<AuthVM>(context, listen: false).refresh(context);
+    }
+  }
 }

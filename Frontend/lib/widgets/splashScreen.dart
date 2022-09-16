@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
       var user = JwtDecoder.decode(token);
       print('isExpired: $isExpired');
       if(isExpired){
-        await Provider.of<AuthVM>(context, listen: false).refresh();
+        await Provider.of<AuthVM>(context, listen: false).refresh(context);
       } else
         await Provider.of<AuthVM>(context, listen: false).getUser(user['userData'], token);
     }
