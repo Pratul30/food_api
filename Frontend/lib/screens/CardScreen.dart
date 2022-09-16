@@ -204,7 +204,7 @@ class _CardScreenState extends State<CardScreen> {
                           "payment_method": {
                             "type": cardType,
                             "fields": {
-                              "number": cardNumber,
+                              "number": cardNumber.toString().replaceAll(' ', ''),
                               "expiration_month": expiryDate.substring(0, 2),
                               "expiration_year": expiryDate.substring(3, 5),
                               "name": cardHolderName,
@@ -222,7 +222,7 @@ class _CardScreenState extends State<CardScreen> {
                       } else if (_payment.status == 200) {
                         WidgetsUi().toast(
                             context: context,
-                            message: "success",
+                            message: "payment made successfully",
                             bColor: Colors.greenAccent);
 
                         Future.delayed(Duration(seconds: 2), () {
