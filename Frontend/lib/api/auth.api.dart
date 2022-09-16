@@ -67,5 +67,15 @@ class AuthApi {
     return AppHelper.response(response.body, response.statusCode);
   }
 
+  static Future<dynamic> availableCountries() async {
+    var response = await http.get(
+      Uri.parse("${AppConstant.backendApi}/countries"),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+    );
+    return AppHelper.response(response.body, response.statusCode);
+  }
+
 
 }

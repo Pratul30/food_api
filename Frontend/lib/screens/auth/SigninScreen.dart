@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/view%20models/auth.vm.dart';
 import 'package:flutter_app/widgets/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 final ui = WidgetsUi();
@@ -226,7 +227,7 @@ class _SigninScreenState extends State<SigninScreen> {
             iconR: IconButton(
               onPressed: () => setState(() {showPwd = !showPwd; }),
               icon: Icon(
-                showPwd ? Icons.close : Icons.remove_red_eye_sharp,
+                showPwd ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
                 color:Colors.grey[400]
               ),
             )

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/view%20models/cart.vm.dart';
 import 'package:flutter_app/providers/view%20models/payment.vm.dart';
+import 'package:flutter_app/screens/countriesScreen.dart';
+import 'package:flutter_app/screens/paymentMethodScreen.dart';
 import 'package:flutter_app/widgets/widgets.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +20,9 @@ class _CardScreenState extends State<CardScreen> {
   String expiryDate = '';
   String cardHolderName = '';
   String cvvCode = '';
+  String currency = 'USD';
+  String cardType = '';
+  String country = "United States of America";
   bool isCvvFocused = false;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -36,6 +41,8 @@ class _CardScreenState extends State<CardScreen> {
     if (cardNumber != '' &&
         expiryDate != '' &&
         cardHolderName != '' &&
+        currency != '' &&
+        cardType != '' &&
         cvvCode != '') return true;
     return false;
   }
@@ -106,6 +113,66 @@ class _CardScreenState extends State<CardScreen> {
               ),
               SizedBox(height: 10.0),
               Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    InkWell(
+                      onTap: () async {
+
+                      final params = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          fullscreenDialog: true, builder: (context) => CountriesScreen(value: 'currency')
+                        ),
+                      );
+                      if(!mounted) return;
+                      setState(() {
+                        currency = params['currency'];
+                        country = params['country'];
+                      });
+                        
+                      Future.delayed(Duration(seconds: 1),() async {
+                        final params = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            fullscreenDialog: true, builder: (context) => PaymentMethodScreen(currency: currency)
+                          ),
+                        );
+                        if(!mounted) return;
+                        print(params['type']);
+                        setState(() {
+                          cardType = params['type'];
+                        });
+                      });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  currency,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                                SizedBox(width: 5.0),
+                                Text("($country)"),
+                              ],
+                            ),
+                            Icon(Icons.chevron_right, color: Colors.grey[600]),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Divider(thickness: 2.0, color: Colors.grey[400]),
+                  ],
+                )
+              ),
+              Padding(
                 padding: const EdgeInsets.all(10),
                 child: WidgetsUi().button(
                     child: _payment.isLoading
@@ -133,9 +200,9 @@ class _CardScreenState extends State<CardScreen> {
                       if (isFilled() && !_payment.isLoading) {
                         var data = {
                           "amount": widget.amountToPay,
-                          "currency": "",
+                          "currency": currency,
                           "payment_method": {
-                            "type": "",
+                            "type": cardType,
                             "fields": {
                               "number": cardNumber,
                               "expiration_month": expiryDate.substring(0, 2),

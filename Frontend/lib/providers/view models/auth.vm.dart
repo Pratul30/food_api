@@ -13,18 +13,24 @@ class AuthVM with ChangeNotifier {
   String _error = "";
   int _status = 100;
   UserModel _user;
+  dynamic _countries = [];
+  List<dynamic> countrieFilters = [];
+
   
 
   bool get isLoading => _loading;
   String get error => _error;
   UserModel get user => _user;
   int get status => _status;
+  List<dynamic> get countries => _countries;
 
 
-  setState(bool value, String err, int sttus){
+
+  setState(bool value, String err, int sttus, {dynamic countriess}){
     _loading = value;
     _error = err;
     _status = sttus;
+    _countries = countriess;
     notifyListeners();
   }
 
@@ -152,6 +158,41 @@ class AuthVM with ChangeNotifier {
         Navigator.pushNamedAndRemoveUntil(context, 'signin', (route) => false);
       }
     }
+  }
+
+
+  availableCountries() async {
+    setState(true, "", 100);
+    try {
+      var resp = await AuthApi.availableCountries();
+      if (resp[2] >= 200 && resp[2] <= 299) {
+        setState(false, "", 200, countriess: resp[0]['data']);
+      } else {
+        setState(false, resp[1]['message'].toString(), resp[2]);
+      }
+    } on Exception catch (e) {
+      debugPrint('[ON EXCEPTION CATCH]\n$e');
+      setState(false, e.toString(), 500);
+    } on Error catch (e) {
+      debugPrint('[ON ERROR CATCH]\n$e');
+      setState(false, e.toString(), 500);
+    }
+  }
+
+
+  countrieFiltersFun(var keyWord) {
+    countrieFilters.clear();
+    if (keyWord != "") {
+      var _result = _countries
+        .where((resp) => [resp["country_name"], resp["currency_code"], resp["phone_code"]].toString().toLowerCase().contains(keyWord.toLowerCase()))
+        .toList();
+
+      if(_result.isNotEmpty) {
+        countrieFilters.addAll(_result);
+      }
+    }
+
+    notifyListeners();
   }
 
 

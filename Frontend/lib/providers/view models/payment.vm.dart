@@ -9,17 +9,21 @@ class PaymentVM with ChangeNotifier {
   bool _loading = false;
   String _error = "";
   int _status = 100;
+  dynamic _paymentMethod = [];
   
 
   bool get isLoading => _loading;
   String get error => _error;
   int get status => _status;
+  List<dynamic> get paymentMethod => _paymentMethod;
 
 
-  setState(bool value, String err, int sttus){
+
+  setState(bool value, String err, int sttus, {dynamic paymentMethodd}){
     _loading = value;
     _error = err;
     _status = sttus;
+    _paymentMethod = paymentMethodd;
     notifyListeners();
   }
 
@@ -47,7 +51,7 @@ class PaymentVM with ChangeNotifier {
     try {
       var resp = await PaymentApi.paymentListByCountry(currency);
       if (resp[2] >= 200 && resp[2] <= 299) {
-        setState(false, "", 200);
+        setState(false, "", 200, paymentMethodd: resp[0]['data']);
       } else {
         setState(false, resp[1]['message'].toString(), resp[2]);
       }
@@ -59,6 +63,4 @@ class PaymentVM with ChangeNotifier {
       setState(false, e.toString(), 500);
     }
   }
-
-
 }

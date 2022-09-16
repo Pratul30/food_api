@@ -1,7 +1,8 @@
-import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/providers/view%20models/auth.vm.dart';
+import 'package:flutter_app/screens/countriesScreen.dart';
 import 'package:flutter_app/widgets/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 final ui = WidgetsUi();
@@ -23,9 +24,9 @@ class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
   var showPwd = true;
 
-  String dialCode = '+224';
-  String country = 'GN';
-  final countryPicker = const FlCountryCodePicker();
+  String dialCode = '1';
+  String country = 'US';
+  // final countryPicker = const FlCountryCodePicker();
   
 
   Future<dynamic> submit(BuildContext ctx) async {
@@ -92,7 +93,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       SizedBox(height: 5.0,),
                       Text(
-                        "Ad ut sit ex exercitation anim\neiusmod mollit eu ad.",
+                        "You don't have an account create\none and enjoy our app",
                         style: TextStyle(
                           fontSize: 14.0,
                           color: Colors.grey[600]
@@ -212,14 +213,17 @@ class _SignupScreenState extends State<SignupScreen> {
             onChange:(_) {},
             iconL: GestureDetector(
               onTap: () async {
-                  final code = await countryPicker.showPicker(context: context);
-                  if (code != null)  {
-                    print(code);
-                    setState(() {
-                      dialCode = code.dialCode;
-                      country = code.code;
-                    });
-                  }
+                  final params = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      fullscreenDialog: true, builder: (context) => CountriesScreen(value: 'phone')
+                    ),
+                  );
+                  if(!mounted) return;
+                  setState(() {
+                    dialCode = params['dialCode'];
+                    country = params['country'];
+                  });
               },
               child: Container(
                 padding: const EdgeInsets.all(10.0),
@@ -228,7 +232,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     color: Colors.orange,
                     borderRadius: BorderRadius.all(Radius.circular(5.0))
                 ),
-                child: Text(dialCode,
+                child: Text("+$dialCode",
                     style: const TextStyle(color: Colors.white)
                 ),
               ),
@@ -250,7 +254,7 @@ class _SignupScreenState extends State<SignupScreen> {
             iconR: IconButton(
               onPressed: () => setState(() {showPwd = !showPwd; }),
               icon: Icon(
-                showPwd ? Icons.close : Icons.remove_red_eye_sharp,
+                showPwd ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
                 color:Colors.grey[400]
               ),
             )
@@ -258,5 +262,17 @@ class _SignupScreenState extends State<SignupScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> navigateAndPickCountry(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CountriesScreen()),
+    );
+
+    // When a BuildContext is used from a StatefulWidget, the mounted property
+    // must be checked after an asynchronous gap.
+    if (!mounted) return;
+    print('result: $result');
   }
 }

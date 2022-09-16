@@ -82,7 +82,8 @@ class _MenuListScreenState extends State<MenuListScreen> {
                             color: Colors.grey[800],
                           ),
                         ),
-                      ));
+                      )
+                );
   }
 
   Widget _buildMenuList(List<MenuList> menu) {
