@@ -33,6 +33,7 @@ class RestaurantListScreen extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 20,
+            color: Colors.white,
           ),
         ),
         backgroundColor: Colors.orange,

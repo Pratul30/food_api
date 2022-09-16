@@ -113,65 +113,65 @@ class _CardScreenState extends State<CardScreen> {
               ),
               SizedBox(height: 10.0),
               Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    InkWell(
-                      onTap: () async {
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          final params = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                fullscreenDialog: true,
+                                builder: (context) =>
+                                    CountriesScreen(value: 'currency')),
+                          );
+                          if (!mounted) return;
+                          setState(() {
+                            currency = params['currency'];
+                            country = params['country'];
+                          });
 
-                      final params = await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          fullscreenDialog: true, builder: (context) => CountriesScreen(value: 'currency')
-                        ),
-                      );
-                      if(!mounted) return;
-                      setState(() {
-                        currency = params['currency'];
-                        country = params['country'];
-                      });
-                        
-                      Future.delayed(Duration(seconds: 1),() async {
-                        final params = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            fullscreenDialog: true, builder: (context) => PaymentMethodScreen(currency: currency)
-                          ),
-                        );
-                        if(!mounted) return;
-                        print(params['type']);
-                        setState(() {
-                          cardType = params['type'];
-                        });
-                      });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  currency,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold
+                          Future.delayed(Duration(seconds: 1), () async {
+                            final params = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  fullscreenDialog: true,
+                                  builder: (context) =>
+                                      PaymentMethodScreen(currency: currency)),
+                            );
+                            if (!mounted) return;
+                            print(params['type']);
+                            setState(() {
+                              cardType = params['type'];
+                            });
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    currency,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
                                   ),
-                                ),
-                                SizedBox(width: 5.0),
-                                Text("($country)"),
-                              ],
-                            ),
-                            Icon(Icons.chevron_right, color: Colors.grey[600]),
-                          ],
+                                  SizedBox(width: 5.0),
+                                  Text("($country)"),
+                                ],
+                              ),
+                              Icon(Icons.chevron_right,
+                                  color: Colors.grey[600]),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    Divider(thickness: 2.0, color: Colors.grey[400]),
-                  ],
-                )
-              ),
+                      Divider(thickness: 2.0, color: Colors.grey[400]),
+                    ],
+                  )),
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: WidgetsUi().button(
@@ -204,7 +204,8 @@ class _CardScreenState extends State<CardScreen> {
                           "payment_method": {
                             "type": cardType,
                             "fields": {
-                              "number": cardNumber.toString().replaceAll(' ', ''),
+                              "number":
+                                  cardNumber.toString().replaceAll(' ', ''),
                               "expiration_month": expiryDate.substring(0, 2),
                               "expiration_year": expiryDate.substring(3, 5),
                               "name": cardHolderName,
@@ -215,25 +216,45 @@ class _CardScreenState extends State<CardScreen> {
                         await _payment.paymentCard(data);
                       }
                       if (_payment.error != "") {
-                        WidgetsUi().toast(
-                            context: context,
-                            message: _payment.error,
-                            bColor: Colors.red);
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text('Sorry, but it\'s not working.'),
+                            content: Text('It\'s not you, it\'s ERROR!'),
+                            actions: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop(true);
+                                },
+                                child: Text('Try Again'),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Theme.of(context).errorColor),
+                              )
+                            ],
+                            //backgroundColor: Theme.of(context).errorColor,
+                          ),
+                        );
                       } else if (_payment.status == 200) {
-                        WidgetsUi().toast(
-                            context: context,
-                            message: "payment made successfully",
-                            bColor: Colors.greenAccent);
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text('Yay! Order Confirmed'),
+                            content:
+                                Text('Now wait and try not to crave much!'),
+                            actions: [
+                              ElevatedButton(
+                                  onPressed: () {
+                                    Provider.of<CartVM>(context, listen: false)
+                                        .removeAllItems();
 
-                        Future.delayed(Duration(seconds: 2), () {
-                          /// remove items in cart
-                          Provider.of<CartVM>(context, listen: false)
-                              .removeAllItems();
-
-                          /// go back to the [Home] page
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, 'home', (route) => false);
-                        });
+                                    /// go back to the [Home] page
+                                    Navigator.pushNamedAndRemoveUntil(
+                                        context, 'home', (route) => false);
+                                  },
+                                  child: Text('Ok'))
+                            ],
+                          ),
+                        );
                       }
                     }),
               ),

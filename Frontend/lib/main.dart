@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Roboto',
-          primaryColor: Colors.orange,
+          primarySwatch: Colors.purple,
         ),
         home: SplashScreen(),
         routes: {

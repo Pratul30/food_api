@@ -32,7 +32,8 @@ class _CartScreenState extends State<CartScreen> {
       ),
       actions: <Widget>[
         CartIconWithBadge(),
-      ], systemOverlayStyle: SystemUiOverlayStyle.dark,
+      ],
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
     );
     return Scaffold(
       appBar: appBar,
@@ -159,29 +160,28 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: WidgetsUi().button(
-                    child: Text(
-                      'Pay \$ ${cart.getTotalAmount.toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
-                        color: Colors.white
+                      child: Text(
+                        'Pay \$ ${cart.getTotalAmount.toStringAsFixed(2)}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                            color: Colors.white),
                       ),
-                    ),
-                    width: double.infinity,
-                    shape: 10.0,
-                    outlineColor: Colors.transparent,
-                    color: Colors.orange,
-                    overColor:Colors.white,
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => CardScreen(
-                          amountToPay: cart.getTotalAmount.toStringAsFixed(2),
-                        ),
-                      ));
-                    }
-                  ),
+                      width: double.infinity,
+                      shape: 10.0,
+                      outlineColor: Colors.transparent,
+                      color: Colors.orange,
+                      overColor: Colors.white,
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => CardScreen(
+                            amountToPay: cart.getTotalAmount.toStringAsFixed(2),
+                          ),
+                        ));
+                      }),
                 )
               ],
             ),
