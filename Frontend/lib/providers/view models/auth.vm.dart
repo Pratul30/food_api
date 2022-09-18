@@ -153,10 +153,6 @@ class AuthVM with ChangeNotifier {
     } on Error catch (e) {
       debugPrint('[ON ERROR CATCH]\n$e');
       setState(false, e.toString(), 500);
-    } finally {
-      if(error != ""){
-        Navigator.pushNamedAndRemoveUntil(context, 'signin', (route) => false);
-      }
     }
   }
 

@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void refresh() async {
     final String token = await AppHelper.getToken();
-    if(token != null && token != ""){
+    if(token != null && token != "" && await AppHelper.getCookie() != "" && await AppHelper.getCookie() != "jwt="){
       Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
       bool  isExpired = JwtDecoder.isExpired(token);
       var user = JwtDecoder.decode(token);

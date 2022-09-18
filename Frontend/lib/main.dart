@@ -20,6 +20,43 @@ void main() {
   runApp(MyApp());
 }
 
+class Homely extends StatelessWidget {
+  const Homely({ Key key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.only(left: 30.0),
+          child: Center(
+            child: Row(
+              children: [
+                Image.asset('assets/images/icon.png', height: 200.0, width: 200.0, fit: BoxFit.cover,),
+                Text("Home",
+                  style: TextStyle(
+                    fontSize: 150.0,
+                    color: Colors.orange,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+                Text("ly",
+                  style: TextStyle(
+                    fontSize: 150.0,
+                    color: Colors.purple,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.bold
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
 
