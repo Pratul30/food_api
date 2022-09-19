@@ -35,34 +35,34 @@ class RestaurantVM with ChangeNotifier {
     loadingRestaurantList = true;
     var locObj = new Location();
     try {
-      // await locObj.getLocation();
-      // final Map<String, double> location = locObj.location;
-      // print(location['latitude']);
-      // final url = Uri.https(
-      //   'travel-advisor.p.rapidapi.com',
-      //   '/restaurants/list-by-latlng',
-      //   {
-      //     'latitude': location['latitude'],
-      //     'longitude': location['longitude'],
-      //     'limit': 30,
-      //     'currency': 'USD',
-      //     'distance': 2,
-      //     'open_now': false,
-      //     'lunit': 'km',
-      //     'lang': 'en_US'
-      //   }.map((key, value) => MapEntry(key, value.toString())),
-      // );
-      // final response = await http.get(url, headers: {
-      //   'X-RapidAPI-Key': 'd37b196933msh4361f5106d5ba66p108077jsne7efe530c45b',
-      //   'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com',
-      // });
-      // final res = json.decode(response.body);
-      // List temp = res['data'];
-      // temp.forEach((element) {
-      //   if (element['ranking_geo_id'] != null) {
-      //     geoId = int.parse(element['ranking_geo_id']);
-      //   }
-      // });
+      await locObj.getLocation();
+      final Map<String, double> location = locObj.location;
+      print(location['latitude']);
+      final url = Uri.https(
+        'travel-advisor.p.rapidapi.com',
+        '/restaurants/list-by-latlng',
+        {
+          'latitude': location['latitude'],
+          'longitude': location['longitude'],
+          'limit': 30,
+          'currency': 'USD',
+          'distance': 2,
+          'open_now': false,
+          'lunit': 'km',
+          'lang': 'en_US'
+        }.map((key, value) => MapEntry(key, value.toString())),
+      );
+      final response = await http.get(url, headers: {
+        'X-RapidAPI-Key': 'd37b196933msh4361f5106d5ba66p108077jsne7efe530c45b',
+        'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com',
+      });
+      final res = json.decode(response.body);
+      List temp = res['data'];
+      temp.forEach((element) {
+        if (element['ranking_geo_id'] != null) {
+          geoId = int.parse(element['ranking_geo_id']);
+        }
+      });
       print(geoId);
       final List<Restaurant> tempRestaurants = [];
       var sectionsList = [];
