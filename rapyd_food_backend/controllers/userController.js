@@ -59,7 +59,7 @@ const registerUser = async (req, res) => {
   if (existing_email || existing_phone) {
     return res.status(400).json({
       status: "ERROR",
-      message: "user already exists",
+      message: "email or phone number already exists",
     });
   }
 
@@ -67,7 +67,7 @@ const registerUser = async (req, res) => {
   //creating a wallet to get wallet_id
   await createWallet({ first_name, last_name, email, phone_number })
     .then((resp) => {
-      console.log("create wallet res: ", resp);
+      //console.log("create wallet res: ", resp);
       if (resp.statusCode != 200) {
         return res.status(resp.statusCode).json(resp.body.status);
       }
@@ -80,10 +80,10 @@ const registerUser = async (req, res) => {
 
   //creating a customer with the acquired walletid.
   if (userDetails.ewallet) {
-    console.log("UserDetails: ", userDetails);
+    //console.log("UserDetails: ", userDetails);
     await createCustomerWithoutPayment(userDetails)
       .then((resp) => {
-        console.log("Create Cus resp: ", resp);
+        //console.log("Create Cus resp: ", resp);
         if (resp.statusCode != 200) {
           return res.status(resp.statusCode).json(resp.body.status);
         }
@@ -170,7 +170,7 @@ const logInUser = async (req, res) => {
   };
 
   const accessToken = jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: "180s",
+    expiresIn: "6h",
   });
   const refreshToken = jwt.sign(
     tokenPayload,
@@ -276,7 +276,7 @@ const refreshToken = async (req, res) => {
   };
 
   const accessToken = jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: "180s",
+    expiresIn: "6h",
   });
 
   return res.status(200).json({
@@ -285,4 +285,9 @@ const refreshToken = async (req, res) => {
   });
 };
 
-module.exports = { registerUser, logInUser, logOut, refreshToken };
+module.exports = {
+  registerUser,
+  logInUser,
+  logOut,
+  refreshToken,
+};
